@@ -76,6 +76,16 @@ namespace Unity
 		unsigned char m_uMarshaledFromNative : 1;
 	};
 
+	struct il2cppPropertyInfo
+	{
+		il2cppClass* m_pParentClass;
+		const char* m_pName;
+		il2cppMethodInfo* m_pGet;
+		il2cppMethodInfo* m_pSet;
+		unsigned int m_uAttributes;
+		unsigned int m_uToken;
+	};
+
 	struct il2cppType
 	{
 		union

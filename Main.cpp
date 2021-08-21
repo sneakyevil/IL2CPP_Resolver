@@ -82,6 +82,7 @@ namespace IL2CPP
 
 			if (!ResolveExport_Boolean(&Data.Functions.m_pClassGetFieldFromName, IL2CPP_CLASS_GET_FIELD_FROM_NAME_EXPORT)) return false;
 			if (!ResolveExport_Boolean(&Data.Functions.m_pClassGetMethodFromName, IL2CPP_CLASS_GET_METHOD_FROM_NAME_EXPORT)) return false;
+			if (!ResolveExport_Boolean(&Data.Functions.m_pClassGetPropertyFromName, IL2CPP_CLASS_GET_PROPERTY_FROM_NAME_EXPORT)) return false;
 			if (!ResolveExport_Boolean(&Data.Functions.m_pFree, IL2CPP_FREE_EXPORT)) return false;
 			if (!ResolveExport_Boolean(&Data.Functions.m_pResolveFunction, IL2CPP_RESOLVE_FUNC_EXPORT)) return false;
 			if (!ResolveExport_Boolean(&Data.Functions.m_pStringNew, IL2CPP_STRING_NEW_EXPORT)) return false;

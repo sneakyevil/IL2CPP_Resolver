@@ -10,6 +10,7 @@ namespace IL2CPP
 		{
 			void* m_pClassGetFieldFromName = nullptr;
 			void* m_pClassGetMethodFromName = nullptr;
+			void* m_pClassGetPropertyFromName = nullptr;
 			void* m_pFree = nullptr;
 			void* m_pResolveFunction = nullptr;
 			void* m_pStringNew = nullptr;
