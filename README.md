@@ -24,7 +24,7 @@ void ThreadStart()
 
 void ThreadEnd()
 {
-    // Called after Start finish
+    // Called after ThreadStart
 }
 
 IL2CPP::Thread::Create(ThreadStart, ThreadEnd);
