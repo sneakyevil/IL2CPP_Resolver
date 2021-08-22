@@ -11,7 +11,7 @@ void SomeFunction()
 
     Unity::CGameObject* pLocal = Unity::GameObject::Find("LocalPlayer");
     Unity::CComponent* pLocalData = pLocal->GetComponent("PlayerData");
-    pLocalData->SetFieldValue<bool>(true, "CanFly");
+    pLocalData->SetMemberValue<bool>("CanFly", true);
 }
 ```
 

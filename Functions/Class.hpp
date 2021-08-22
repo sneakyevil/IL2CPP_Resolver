@@ -52,7 +52,6 @@ namespace IL2CPP
 			return reinterpret_cast<TReturn(UNITY_CALLING_CONVENTION)(void*, TArgs...)>(m_pMethod->m_pMethodPointer)(this, tArgs...);
 		}
 
-		// Automatically resolve Member, no matter if its Field or Property (Might impact performance)
 		template<typename T>
 		T GetMemberValue(const char* m_pMemberName)
 		{
