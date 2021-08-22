@@ -1,7 +1,7 @@
 ## IL2CPP Resolver
 A run-time API resolver for IL2CPP Unity.
 
-# Quick Example
+### Quick Example
 ```cpp
 #include "Main.hpp"
 
@@ -15,7 +15,7 @@ void SomeFunction()
 }
 ```
 
-# Creating Thread
+### Creating Thread
 ```cpp
 void ThreadStart()
 { 
