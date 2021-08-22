@@ -2,7 +2,7 @@
 
 namespace IL2CPP
 {
-	enum m_eClassPropType
+	enum class m_eClassPropType : int
 	{
 		Unknown = 0,
 		Field,			// Member of class that can be accessed directly by RVA
@@ -10,7 +10,7 @@ namespace IL2CPP
 		Method,			// Function of class
 	};
 
-	class Class
+	class CClass
 	{
 	public:
 		Unity::il2cppObject m_Object = { 0 };
@@ -37,6 +37,19 @@ namespace IL2CPP
 			if (!pMethod) return nullptr;
 
 			return pMethod->m_pMethodPointer;
+		}
+
+		template<typename TReturn, typename... TArgs>
+		TReturn CallMethod(const char* m_pMethodName, TArgs... tArgs)
+		{
+			Unity::il2cppMethodInfo* m_pMethod = reinterpret_cast<Unity::il2cppMethodInfo*(IL2CPP_CALLING_CONVENTION)(void*, const char*, int)>(Data.Functions.m_pClassGetMethodFromName)(m_Object.m_pClass, m_pMethodName, -1);
+			if (!m_pMethod || !m_pMethod->m_pMethodPointer)
+			{
+				TReturn m_tDefault = { 0 };
+				return m_tDefault;
+			}
+
+			return reinterpret_cast<TReturn(UNITY_CALLING_CONVENTION)(void*, TArgs...)>(m_pMethod->m_pMethodPointer)(this, tArgs...);
 		}
 
 		// Automatically resolve Member, no matter if its Field or Property (Might impact performance)
@@ -71,5 +84,33 @@ namespace IL2CPP
 			Unity::il2cppPropertyInfo* pProperty = reinterpret_cast<Unity::il2cppPropertyInfo * (IL2CPP_CALLING_CONVENTION)(void*, const char*)>(Data.Functions.m_pClassGetPropertyFromName)(m_Object.m_pClass, m_pMemberName);
 			if (pProperty && pProperty->m_pSet) return reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, T)>(pProperty->m_pSet->m_pMethodPointer)(this, tValue);
 		}
+
+		template<typename T>
+		T GetPropertyValue(const char* m_pPropertyName)
+		{
+			Unity::il2cppPropertyInfo* pProperty = reinterpret_cast<Unity::il2cppPropertyInfo*(IL2CPP_CALLING_CONVENTION)(void*, const char*)>(Data.Functions.m_pClassGetPropertyFromName)(m_Object.m_pClass, m_pPropertyName);
+			if (pProperty && pProperty->m_pGet) return reinterpret_cast<T(UNITY_CALLING_CONVENTION)(void*)>(pProperty->m_pGet->m_pMethodPointer)(this);
+
+			T tDefault = { 0 };
+			return tDefault;
+		}
+
+		template<typename T>
+		void SetPropertyValue(const char* m_pPropertyName, T tValue)
+		{
+			Unity::il2cppPropertyInfo* pProperty = reinterpret_cast<Unity::il2cppPropertyInfo*(IL2CPP_CALLING_CONVENTION)(void*, const char*)>(Data.Functions.m_pClassGetPropertyFromName)(m_Object.m_pClass, m_pPropertyName);
+			if (pProperty && pProperty->m_pSet) return reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, T)>(pProperty->m_pSet->m_pMethodPointer)(this, tValue);
+		}
 	};
+
+	namespace Class
+	{
+		Unity::il2cppType* GetType(Unity::il2cppClass* m_pClass);
+
+		Unity::il2cppObject* GetSystemType(Unity::il2cppClass* m_pClass);
+
+		Unity::il2cppClass* GetFromName(Unity::il2cppImage* m_pImage, const char* m_pNamespace, const char* m_pName);
+
+		Unity::il2cppClass* Find(const char* m_pName);
+	}
 }

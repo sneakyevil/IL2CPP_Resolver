@@ -80,12 +80,19 @@ namespace IL2CPP
 			IL2CPP_ASSERT(m_bInitExportResolved && "Couldn't resolve il2cpp_init!");
 			if (!m_bInitExportResolved) return false;
 
+			if (!ResolveExport_Boolean(&Data.Functions.m_pClassFromName, IL2CPP_CLASS_FROM_NAME_EXPORT)) return false;
 			if (!ResolveExport_Boolean(&Data.Functions.m_pClassGetFieldFromName, IL2CPP_CLASS_GET_FIELD_FROM_NAME_EXPORT)) return false;
 			if (!ResolveExport_Boolean(&Data.Functions.m_pClassGetMethodFromName, IL2CPP_CLASS_GET_METHOD_FROM_NAME_EXPORT)) return false;
 			if (!ResolveExport_Boolean(&Data.Functions.m_pClassGetPropertyFromName, IL2CPP_CLASS_GET_PROPERTY_FROM_NAME_EXPORT)) return false;
+			if (!ResolveExport_Boolean(&Data.Functions.m_pClassGetType, IL2CPP_CLASS_GET_TYPE_EXPORT)) return false;
+			if (!ResolveExport_Boolean(&Data.Functions.m_pDomainGet, IL2CPP_DOMAIN_GET_EXPORT)) return false;
+			if (!ResolveExport_Boolean(&Data.Functions.m_pDomainGetAssemblies, IL2CPP_DOMAIN_GET_ASSEMBLIES_EXPORT)) return false;
 			if (!ResolveExport_Boolean(&Data.Functions.m_pFree, IL2CPP_FREE_EXPORT)) return false;
 			if (!ResolveExport_Boolean(&Data.Functions.m_pResolveFunction, IL2CPP_RESOLVE_FUNC_EXPORT)) return false;
 			if (!ResolveExport_Boolean(&Data.Functions.m_pStringNew, IL2CPP_STRING_NEW_EXPORT)) return false;
+			if (!ResolveExport_Boolean(&Data.Functions.m_pThreadAttach, IL2CPP_THREAD_ATTACH_EXPORT)) return false;
+			if (!ResolveExport_Boolean(&Data.Functions.m_pThreadDetach, IL2CPP_THREAD_DETACH_EXPORT)) return false;
+			if (!ResolveExport_Boolean(&Data.Functions.m_pTypeGetObject, IL2CPP_TYPE_GET_OBJECT_EXPORT)) return false;
 
 			// Unity APIs
 			Unity::Component::Initialize();

@@ -2,6 +2,37 @@
 
 namespace Unity
 {
+	struct il2cppImage
+	{
+		const char* m_pName;
+		const char* m_pNameNoExt;
+	};
+
+	struct il2cppAssemblyName
+	{
+		const char* m_pName;
+		const char* m_pCulture;
+		const char* m_pHash;
+		const char* m_pPublicKey;
+		unsigned int m_uHash;
+		int m_iHashLength;
+		unsigned int m_uFlags;
+		int m_iMajor;
+		int m_iMinor;
+		int m_iBuild;
+		int m_bRevision;
+		unsigned char m_uPublicKeyToken[8];
+	};
+
+	struct il2cppAssembly
+	{
+		il2cppImage* m_pImage;
+		unsigned int m_uToken;
+		int m_ReferencedAssemblyStart;
+		int m_ReferencedAssemblyCount;
+		il2cppAssemblyName m_aName;
+	};
+
 	struct il2cppClass
 	{
 		void* m_pImage;

@@ -16,8 +16,10 @@
 
 // IL2CPP
 #include "Functions/Class.hpp"
+#include "Functions/Domain.hpp"
 #include "Functions/ResolveCall.hpp"
 #include "Functions/String.hpp"
+#include "Functions/Thread.hpp"
 
 // Unity API - Include here so we have access to some cute IL2CPP Features
 #include "Unity/API/_TEMPLATE_API.hpp"

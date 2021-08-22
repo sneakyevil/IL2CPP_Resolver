@@ -9,7 +9,7 @@ namespace Unity
 	};
 	extern S_TEMPLATEFunctions _TEMPLATEFunctions;
 
-	class C_TEMPLATE : public IL2CPP::Class
+	class C_TEMPLATE : public IL2CPP::CClass
 	{
 	public:
 

@@ -9,6 +9,7 @@ namespace Unity
 		void Initialize()
 		{
 			ObjectFunctions.m_pDestroy = IL2CPP::ResolveCall(UNITY_OBJECT_DESTROY);
+			ObjectFunctions.m_pFindObjectsOfType = IL2CPP::ResolveCall(UNITY_OBJECT_FINDOBJECTSOFTYPE);
 		}
 	}
 }

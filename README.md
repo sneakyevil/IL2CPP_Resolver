@@ -14,3 +14,18 @@ void SomeFunction()
     pLocalData->SetFieldValue<bool>(true, "CanFly");
 }
 ```
+
+# Creating Thread
+```cpp
+void ThreadStart()
+{ 
+    // Stuff ... Loop ... Smth
+}
+
+void ThreadEnd()
+{
+    // Called after Start finish
+}
+
+IL2CPP::Thread::Create(ThreadStart, ThreadEnd);
+```

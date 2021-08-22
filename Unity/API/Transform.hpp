@@ -11,7 +11,7 @@ namespace Unity
 	};
 	extern STransformFunctions TransformFunctions;
 
-	class CTransform : public IL2CPP::Class
+	class CTransform : public IL2CPP::CClass
 	{
 	public:
 		Vector3 GetPosition()

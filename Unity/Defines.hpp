@@ -9,12 +9,12 @@
 // GameObject
 #define UNITY_GAMEOBJECT_CREATEPRIMITIVE "UnityEngine.GameObject::CreatePrimitive"
 #define UNITY_GAMEOBJECT_FIND "UnityEngine.GameObject::Find"
-#define UNITY_GAMEOBJECT_FINDWITHTAG "UnityEngine.GameObject::FindWithTag"
 #define UNITY_GAMEOBJECT_GETCOMPONENT "UnityEngine.GameObject::GetComponentByName"
 #define UNITY_GAMEOBJECT_GETTRANSFORM "UnityEngine.GameObject::get_transform"
 
 // Object
 #define UNITY_OBJECT_DESTROY "UnityEngine.Object::Destroy"
+#define UNITY_OBJECT_FINDOBJECTSOFTYPE "UnityEngine.Object::FindObjectsOfType"
 
 // Transform
 #define UNITY_TRANSFORM_GETPOSITION "UnityEngine.Transform::get_position_Injected"

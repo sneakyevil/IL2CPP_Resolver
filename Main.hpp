@@ -19,6 +19,9 @@ namespace IL2CPP
 		};
 
 		extern m_eExportObfuscationType m_ExportObfuscation;
+
+		void* ResolveExport(const char* m_pName);
+
 		bool Initialize();
 	}
 }
