@@ -26,4 +26,5 @@
 #include "Unity/API/Object.hpp"
 #include "Unity/API/Component.hpp"
 #include "Unity/API/GameObject.hpp"
+#include "Unity/API/LayerMask.hpp"
 #include "Unity/API/Transform.hpp"

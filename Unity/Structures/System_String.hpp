@@ -7,6 +7,12 @@ namespace Unity
 		int m_iLength;
 		wchar_t m_wString[1024];
 
+		void Clear()
+		{
+			memset(m_wString, 0, static_cast<size_t>(m_iLength * 2));
+			m_iLength = 0;
+		}
+
 		std::string ToString()
 		{
 			std::string sRet(m_iLength + 1, '\0');
