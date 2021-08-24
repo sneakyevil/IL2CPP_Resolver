@@ -18,9 +18,9 @@ namespace Unity
 			return reinterpret_cast<System_String*(UNITY_CALLING_CONVENTION)(unsigned int)>(LayerMaskFunctions.m_pLayerToName)(m_uLayer);
 		}
 
-		static unsigned int NameToLayer(System_String* m_pName)
+		static unsigned int NameToLayer(const char* m_pName)
 		{
-			return reinterpret_cast<unsigned int(UNITY_CALLING_CONVENTION)(void*)>(LayerMaskFunctions.m_pNameToLayer)(m_pName);
+			return reinterpret_cast<unsigned int(UNITY_CALLING_CONVENTION)(void*)>(LayerMaskFunctions.m_pNameToLayer)(IL2CPP::String::New(m_pName));
 		}
 	}
 }
