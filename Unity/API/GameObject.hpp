@@ -4,6 +4,7 @@ namespace Unity
 {
 	struct SGameObjectFunctions
 	{
+		void* m_pAddComponent = nullptr;
 		void* m_pCreatePrimitive = nullptr;
 		void* m_pFind = nullptr;
 		void* m_pGetComponent = nullptr;
@@ -17,6 +18,11 @@ namespace Unity
 	class CGameObject : public CObject
 	{
 	public:
+		void AddComponent(il2cppObject* m_pSystemType)
+		{
+			reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, void*)>(GameObjectFunctions.m_pAddComponent)(this, m_pSystemType);
+		}
+
 		CComponent* GetComponent(const char* m_pName)
 		{
 			return reinterpret_cast<CComponent*(UNITY_CALLING_CONVENTION)(void*, System_String*)>(GameObjectFunctions.m_pGetComponent)(this, IL2CPP::String::New(m_pName));
@@ -47,7 +53,7 @@ namespace Unity
 
 		void SetLayer(unsigned int m_uLayer)
 		{
-			return reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, unsigned int)>(GameObjectFunctions.m_pSetLayer)(this, m_uLayer);
+			reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, unsigned int)>(GameObjectFunctions.m_pSetLayer)(this, m_uLayer);
 		}
 	};
 
