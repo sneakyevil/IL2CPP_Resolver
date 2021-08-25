@@ -8,7 +8,9 @@ namespace Unity
 		void* m_pFind = nullptr;
 		void* m_pGetComponent = nullptr;
 		void* m_pGetComponents = nullptr;
+		void* m_pGetLayer = nullptr;
 		void* m_pGetTransform = nullptr;
+		void* m_pSetLayer = nullptr;
 	};
 	extern SGameObjectFunctions GameObjectFunctions;
 
@@ -36,6 +38,16 @@ namespace Unity
 		CTransform* GetTransform()
 		{
 			return reinterpret_cast<CTransform*(UNITY_CALLING_CONVENTION)(void*)>(GameObjectFunctions.m_pGetTransform)(this);
+		}
+
+		unsigned int GetLayer()
+		{
+			return reinterpret_cast<unsigned int(UNITY_CALLING_CONVENTION)(void*)>(GameObjectFunctions.m_pGetLayer)(this);
+		}
+
+		void SetLayer(unsigned int m_uLayer)
+		{
+			return reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, unsigned int)>(GameObjectFunctions.m_pSetLayer)(this, m_uLayer);
 		}
 	};
 
