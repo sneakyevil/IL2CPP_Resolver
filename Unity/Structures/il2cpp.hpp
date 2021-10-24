@@ -147,6 +147,6 @@ namespace Unity
 		il2cppObject m_Object;
 		il2cppArrayBounds* m_pBounds;
 		uintptr_t m_uMaxLength;
-		T* m_pArray[65536];
+		T m_pArray[65536];
 	};
 }
