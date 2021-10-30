@@ -2,7 +2,7 @@
 
 namespace IL2CPP
 {
-	DWORD ThreadHandler(void* pReserved);
+	DWORD __stdcall ThreadHandler(void* pReserved);
 
 	class CThread
 	{
@@ -16,9 +16,9 @@ namespace IL2CPP
 			m_pThreadOnStart = m_pOnStart;
 			m_pThreadOnEnd = m_pOnEnd;
 
-			if (!m_pThreadOnStart || !m_pThreadOnEnd)
+			if (!m_pThreadOnStart)
 			{
-				IL2CPP_ASSERT("IL2CPP::CThread - m_pThreadOnStart/m_pThreadOnEnd is nullptr");
+				IL2CPP_ASSERT("IL2CPP::CThread - m_pThreadOnStart is nullptr");
 				return;
 			}
 
@@ -28,7 +28,7 @@ namespace IL2CPP
 
 	namespace Thread
 	{
-		static void Create(void* m_pOnStart, void* m_pOnEnd)
+		static void Create(void* m_pOnStart, void* m_pOnEnd = nullptr)
 		{
 			CThread* pThread = new CThread(m_pOnStart, m_pOnEnd);
 			IL2CPP_ASSERT(pThread && "IL2CPP::Thread::Create - Failed!");

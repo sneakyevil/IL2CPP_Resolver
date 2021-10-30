@@ -2,7 +2,7 @@
 
 namespace IL2CPP
 {
-	DWORD ThreadHandler(void* pReserved)
+	DWORD __stdcall ThreadHandler(void* pReserved)
 	{
 		void* m_pIL2CPPThread = Thread::Attach(Domain::Get());
 
@@ -12,9 +12,10 @@ namespace IL2CPP
 		delete m_pThread;
 
 		reinterpret_cast<void(*)()>(m_pThreadStart)();
-		Thread::Detach(m_pIL2CPPThread);
-		reinterpret_cast<void(*)()>(m_pThreadEnd)();
+		if (m_pThreadEnd)
+			reinterpret_cast<void(*)()>(m_pThreadEnd)();
 
+		Thread::Detach(m_pIL2CPPThread);
 		return 0x0;
 	}
 }
