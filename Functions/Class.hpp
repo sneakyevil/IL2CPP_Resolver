@@ -19,13 +19,16 @@ namespace IL2CPP
 		m_eClassPropType GetPropType(const char* m_pPropType)
 		{
 			Unity::il2cppFieldInfo* pField = reinterpret_cast<Unity::il2cppFieldInfo*(IL2CPP_CALLING_CONVENTION)(void*, const char*)>(Data.Functions.m_pClassGetFieldFromName)(m_Object.m_pClass, m_pPropType);
-			if (pField) return m_eClassPropType::Field;
+			if (pField) 
+				return m_eClassPropType::Field;
 
 			Unity::il2cppPropertyInfo* pProperty = reinterpret_cast<Unity::il2cppPropertyInfo*(IL2CPP_CALLING_CONVENTION)(void*, const char*)>(Data.Functions.m_pClassGetPropertyFromName)(m_Object.m_pClass, m_pPropType);
-			if (pProperty) return m_eClassPropType::Property;
+			if (pProperty) 
+				return m_eClassPropType::Property;
 
 			Unity::il2cppMethodInfo* pMethod = reinterpret_cast<Unity::il2cppMethodInfo*(IL2CPP_CALLING_CONVENTION)(void*, const char*, int)>(Data.Functions.m_pClassGetMethodFromName)(m_Object.m_pClass, m_pPropType, -1);
-			if (pMethod) return m_eClassPropType::Method;
+			if (pMethod) 
+				return m_eClassPropType::Method;
 
 			return m_eClassPropType::Unknown;
 		}
@@ -53,6 +56,25 @@ namespace IL2CPP
 		}
 
 		template<typename T>
+		T GetPropertyValue(const char* m_pPropertyName)
+		{
+			Unity::il2cppPropertyInfo* pProperty = reinterpret_cast<Unity::il2cppPropertyInfo * (IL2CPP_CALLING_CONVENTION)(void*, const char*)>(Data.Functions.m_pClassGetPropertyFromName)(m_Object.m_pClass, m_pPropertyName);
+			if (pProperty && pProperty->m_pGet) 
+				return reinterpret_cast<T(UNITY_CALLING_CONVENTION)(void*)>(pProperty->m_pGet->m_pMethodPointer)(this);
+
+			T tDefault = { 0 };
+			return tDefault;
+		}
+
+		template<typename T>
+		void SetPropertyValue(const char* m_pPropertyName, T m_tValue)
+		{
+			Unity::il2cppPropertyInfo* pProperty = reinterpret_cast<Unity::il2cppPropertyInfo * (IL2CPP_CALLING_CONVENTION)(void*, const char*)>(Data.Functions.m_pClassGetPropertyFromName)(m_Object.m_pClass, m_pPropertyName);
+			if (pProperty && pProperty->m_pSet) 
+				return reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, T)>(pProperty->m_pSet->m_pMethodPointer)(this, m_tValue);
+		}
+
+		template<typename T>
 		T GetMemberValue(const char* m_pMemberName)
 		{
 			Unity::il2cppFieldInfo* pField = reinterpret_cast<Unity::il2cppFieldInfo*(IL2CPP_CALLING_CONVENTION)(void*, const char*)>(Data.Functions.m_pClassGetFieldFromName)(m_Object.m_pClass, m_pMemberName);
@@ -61,44 +83,23 @@ namespace IL2CPP
 				if (pField->m_iOffset >= 0) return *reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset);
 			}
 			else
-			{
-				Unity::il2cppPropertyInfo* pProperty = reinterpret_cast<Unity::il2cppPropertyInfo*(IL2CPP_CALLING_CONVENTION)(void*, const char*)>(Data.Functions.m_pClassGetPropertyFromName)(m_Object.m_pClass, m_pMemberName);
-				if (pProperty && pProperty->m_pGet) return reinterpret_cast<T(UNITY_CALLING_CONVENTION)(void*)>(pProperty->m_pGet->m_pMethodPointer)(this);
-			}
+				return GetPropertyValue<T>(m_pMemberName);
 
 			T tDefault = { 0 };
 			return tDefault;
 		}
 
 		template<typename T>
-		void SetMemberValue(const char* m_pMemberName, T tValue)
+		void SetMemberValue(const char* m_pMemberName, T m_tValue)
 		{
 			Unity::il2cppFieldInfo* pField = reinterpret_cast<Unity::il2cppFieldInfo * (IL2CPP_CALLING_CONVENTION)(void*, const char*)>(Data.Functions.m_pClassGetFieldFromName)(m_Object.m_pClass, m_pMemberName);
 			if (pField)
 			{
-				if (pField->m_iOffset >= 0) *reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset) = tValue;
+				if (pField->m_iOffset >= 0) *reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset) = m_tValue;
 				return;
 			}
-			
-			Unity::il2cppPropertyInfo* pProperty = reinterpret_cast<Unity::il2cppPropertyInfo * (IL2CPP_CALLING_CONVENTION)(void*, const char*)>(Data.Functions.m_pClassGetPropertyFromName)(m_Object.m_pClass, m_pMemberName);
-			if (pProperty && pProperty->m_pSet) return reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, T)>(pProperty->m_pSet->m_pMethodPointer)(this, tValue);
-		}
 
-		template<typename T>
-		T GetPropertyValue(const char* m_pPropertyName)
-		{
-			Unity::il2cppPropertyInfo* pProperty = reinterpret_cast<Unity::il2cppPropertyInfo*(IL2CPP_CALLING_CONVENTION)(void*, const char*)>(Data.Functions.m_pClassGetPropertyFromName)(m_Object.m_pClass, m_pPropertyName);
-			if (pProperty && pProperty->m_pGet) return reinterpret_cast<T(UNITY_CALLING_CONVENTION)(void*)>(pProperty->m_pGet->m_pMethodPointer)(this);
-
-			T tDefault = { 0 };
-			return tDefault;
-		}
-
-		template<typename T>
-		void SetPropertyValue(const char* m_pPropertyName, T tValue)
-		{
-			Unity::il2cppPropertyInfo* pProperty = reinterpret_cast<Unity::il2cppPropertyInfo*(IL2CPP_CALLING_CONVENTION)(void*, const char*)>(Data.Functions.m_pClassGetPropertyFromName)(m_Object.m_pClass, m_pPropertyName);
-			if (pProperty && pProperty->m_pSet) return reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, T)>(pProperty->m_pSet->m_pMethodPointer)(this, tValue);
+			SetPropertyValue<T>(m_pMemberName, m_tValue);
 		}
 	};
 
