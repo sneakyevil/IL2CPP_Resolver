@@ -65,10 +65,28 @@ namespace Unity
 		void* m_pMonitor = nullptr;
 	};
 
+	struct il2cppType
+	{
+		union
+		{
+			void* m_pDummy;
+			unsigned int m_uClassIndex;
+			il2cppType* m_pType;
+			void* m_pArray;
+			unsigned int m_uGenericParameterIndex;
+			void* m_pGenericClass;
+		};
+		unsigned int m_uAttributes : 16;
+		unsigned int m_uType : 8;
+		unsigned int m_uMods : 6;
+		unsigned int m_uByref : 1;
+		unsigned int m_uPinned : 1;
+	};
+
 	struct il2cppFieldInfo
 	{
 		const char* m_pName;
-		void* m_pType;
+		il2cppType* m_pType;
 		il2cppClass* m_pParentClass;
 		int m_iOffset;
 		int m_iAttributeIndex;
@@ -81,7 +99,7 @@ namespace Unity
 		void* m_pInvokerMethod;
 		const char* m_pName;
 		il2cppClass* m_pClass;
-		void* m_pReturnType;
+		il2cppType* m_pReturnType;
 		void* m_pParameters;
 
 		union
@@ -115,24 +133,6 @@ namespace Unity
 		il2cppMethodInfo* m_pSet;
 		unsigned int m_uAttributes;
 		unsigned int m_uToken;
-	};
-
-	struct il2cppType
-	{
-		union
-		{
-			void* m_pDummy;
-			unsigned int m_uClassIndex;
-			il2cppType* m_pType;
-			void* m_pArray;
-			unsigned int m_uGenericParameterIndex;
-			void* m_pGenericClass;
-		};
-		unsigned int m_uAttributes : 16;
-		unsigned int m_uType : 8;
-		unsigned int m_uMods : 6;
-		unsigned int m_uByref : 1;
-		unsigned int m_uPinned : 1;
 	};
 
 	struct il2cppArrayBounds

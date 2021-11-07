@@ -39,3 +39,45 @@
 #define UNITY_TRANSFORM_SETLOCALPOSITION							UNITY_TRANSFORM_CLASS"::set_localPosition_Injected"
 #define UNITY_TRANSFORM_SETLOCALROTATION							UNITY_TRANSFORM_CLASS"::set_localRotation_Injected"
 #define UNITY_TRANSFORM_SETLOCALSCALE								UNITY_TRANSFORM_CLASS"::set_localScale_Injected"
+
+namespace Unity
+{
+    enum m_eTypeEnum
+    {
+        Type_Void = 1,
+        Type_Boolean = 2,
+        Type_Character = 3,
+        Type_Integer = 8,
+        Type_Float = 12,
+        Type_String = 14,
+        Type_Pointer = 15,
+        Type_ValueType = 17,
+        Type_Class = 18,
+        Type_Variable = 19,
+        Type_Array = 20,
+        Type_Enum = 85,
+	};
+
+    enum m_eFieldAttribute
+    {
+        FieldAttribute_Compiler,
+        FieldAttribute_Private,
+        FieldAttribute_FamilyAndAssembly,
+        FieldAttribute_Assembly,
+        FieldAttribute_Family,
+        FieldAttribute_FamilyOrAssembly,
+        FieldAttribute_Public,
+        FieldAttribute_AccessMask,
+        FieldAttribute_Static = 16,
+        FieldAttribute_InitOnly = 32,
+        FieldAttribute_Literal = 64,
+        FieldAttribute_NotSerialized = 128,
+        FieldAttribute_HasRVA = 256,
+        FieldAttribute_SpecialName = 512,
+        FieldAttribute_RTSpecialName = 1024,
+        FieldAttribute_HasMarshal = 4096,
+        FieldAttribute_InvokeImpl = 8192,
+        FieldAttribute_Default = 32768,
+        FieldAttribute_Reserved = 38144,
+    };
+}

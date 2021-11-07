@@ -4,6 +4,25 @@ namespace IL2CPP
 {
 	namespace Class
 	{
+        Unity::il2cppFieldInfo* GetFields(Unity::il2cppClass* m_pClass, void** m_pIterator)
+        {
+            return reinterpret_cast<Unity::il2cppFieldInfo*(IL2CPP_CALLING_CONVENTION)(void*, void**)>(Data.Functions.m_pClassGetFields)(m_pClass, m_pIterator);
+        }
+
+        void FetchFields(Unity::il2cppClass* m_pClass, std::vector<Unity::il2cppFieldInfo*>* m_pVector, void* m_pFieldIterator)
+        {
+            m_pVector->clear();
+
+            while (1)
+            {
+                Unity::il2cppFieldInfo* m_pField = GetFields(m_pClass, &m_pFieldIterator);
+                if (!m_pField)
+                    break;
+
+                m_pVector->emplace_back(m_pField);
+            }
+        }
+
         Unity::il2cppType* GetType(Unity::il2cppClass* m_pClass)
         {
             return reinterpret_cast<Unity::il2cppType*(IL2CPP_CALLING_CONVENTION)(void*)>(Data.Functions.m_pClassGetType)(m_pClass);
@@ -36,7 +55,11 @@ namespace IL2CPP
 
                 m_pName = m_pNameSpaceEnd + 1;
             }
-            else m_pNameSpace = new char[2];
+            else
+            {
+                m_pNameSpace = new char[2];
+                memset(m_pNameSpace, 0, 2);
+            }
 
             Unity::il2cppClass* m_pClassReturn = nullptr;
             for (size_t i = 0U; m_sAssembliesCount > i; ++i)

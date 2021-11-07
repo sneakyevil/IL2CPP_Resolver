@@ -83,6 +83,7 @@ namespace IL2CPP
 			std::unordered_map<const char*, void**> m_uExports =
 			{
 				{ IL2CPP_CLASS_FROM_NAME_EXPORT,				&Data.Functions.m_pClassFromName },
+				{ IL2CPP_CLASS_GET_FIELDS,						&Data.Functions.m_pClassGetFields },
 				{ IL2CPP_CLASS_GET_FIELD_FROM_NAME_EXPORT,		&Data.Functions.m_pClassGetFieldFromName },
 				{ IL2CPP_CLASS_GET_METHOD_FROM_NAME_EXPORT,		&Data.Functions.m_pClassGetMethodFromName },
 				{ IL2CPP_CLASS_GET_PROPERTY_FROM_NAME_EXPORT,	&Data.Functions.m_pClassGetPropertyFromName },

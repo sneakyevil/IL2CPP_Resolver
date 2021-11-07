@@ -9,6 +9,7 @@ namespace IL2CPP
 		struct SFunctions
 		{
 			void* m_pClassFromName = nullptr;
+			void* m_pClassGetFields = nullptr;
 			void* m_pClassGetFieldFromName = nullptr;
 			void* m_pClassGetMethodFromName = nullptr;
 			void* m_pClassGetPropertyFromName = nullptr;
