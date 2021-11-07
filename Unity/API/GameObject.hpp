@@ -28,12 +28,12 @@ namespace Unity
 			return reinterpret_cast<CComponent*(UNITY_CALLING_CONVENTION)(void*, System_String*)>(GameObjectFunctions.m_pGetComponent)(this, IL2CPP::String::New(m_pName));
 		}
 
-		il2cppArray<CComponent>* GetComponents(il2cppObject* m_pSystemType)
+		il2cppArray<CComponent*>* GetComponents(il2cppObject* m_pSystemType)
 		{
-			return reinterpret_cast<Unity::il2cppArray<CComponent>*(UNITY_CALLING_CONVENTION)(void*, void*, bool, bool, bool, bool, void*)>(GameObjectFunctions.m_pGetComponents)(this, m_pSystemType, false, false, true, false, nullptr);
+			return reinterpret_cast<Unity::il2cppArray<CComponent*>*(UNITY_CALLING_CONVENTION)(void*, void*, bool, bool, bool, bool, void*)>(GameObjectFunctions.m_pGetComponents)(this, m_pSystemType, false, false, true, false, nullptr);
 		}
 
-		il2cppArray<CComponent>* GetComponents(const char* m_pSystemTypeName)
+		il2cppArray<CComponent*>* GetComponents(const char* m_pSystemTypeName)
 		{
 			il2cppClass* pClass = IL2CPP::Class::Find(m_pSystemTypeName);
 			if (!pClass) return nullptr;

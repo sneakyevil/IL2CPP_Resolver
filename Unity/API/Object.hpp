@@ -29,9 +29,9 @@ namespace Unity
 		void Initialize();
 
 		template<typename T>
-		static il2cppArray<T>* FindObjectsOfType(il2cppObject* m_pSystemType)
+		static il2cppArray<T*>* FindObjectsOfType(il2cppObject* m_pSystemType)
 		{
-			return reinterpret_cast<Unity::il2cppArray<T>*(UNITY_CALLING_CONVENTION)(void*)>(ObjectFunctions.m_pFindObjectsOfType)(m_pSystemType);
+			return reinterpret_cast<Unity::il2cppArray<T*>*(UNITY_CALLING_CONVENTION)(void*)>(ObjectFunctions.m_pFindObjectsOfType)(m_pSystemType);
 		}
 
 		template<typename T>
