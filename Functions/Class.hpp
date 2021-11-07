@@ -15,6 +15,13 @@ namespace IL2CPP
 		Unity::il2cppClass* GetFromName(Unity::il2cppImage* m_pImage, const char* m_pNamespace, const char* m_pName);
 
 		Unity::il2cppClass* Find(const char* m_pName);
+
+		namespace Utils
+		{
+			int GetFieldOffset(Unity::il2cppClass* m_pClass, const char* m_pName);
+
+			int GetFieldOffset(const char* m_pClassName, const char* m_pName);
+		}
 	}
 
 	enum class m_eClassPropType : int

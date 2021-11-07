@@ -74,5 +74,33 @@ namespace IL2CPP
             delete[] m_pNameSpace;
             return m_pClassReturn;
 		}
+
+        namespace Utils
+        {
+            int GetFieldOffset(Unity::il2cppClass* m_pClass, const char* m_pName)
+            {
+                void* m_pFieldIterator = nullptr;
+                while (1)
+                {
+                    Unity::il2cppFieldInfo* m_pField = GetFields(m_pClass, &m_pFieldIterator);
+                    if (!m_pField)
+                        break;
+
+                    if (strcmp(m_pField->m_pName, m_pName) == 0)
+                        return m_pField->m_iOffset;
+                }
+
+                return 0;
+            }
+
+            int GetFieldOffset(const char* m_pClassName, const char* m_pName)
+            {
+                Unity::il2cppClass* m_pClass = Find(m_pClassName);
+                if (m_pClass)
+                    return GetFieldOffset(m_pClass, m_pName);
+
+                return 0;
+            }
+        }
 	}
 }
