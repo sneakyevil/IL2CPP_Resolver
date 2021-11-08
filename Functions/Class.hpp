@@ -23,6 +23,8 @@ namespace IL2CPP
 			int GetFieldOffset(const char* m_pClassName, const char* m_pName);
 
 			void* GetMethodPointer(Unity::il2cppClass* m_pClass, const char* m_pMethodName, int m_iArgs = -1);
+
+			void* GetMethodPointer(const char* m_pClassName, const char* m_pMethodName, int m_iArgs = -1);
 		}
 	}
 
