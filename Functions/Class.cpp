@@ -101,6 +101,14 @@ namespace IL2CPP
 
                 return 0;
             }
+
+            void* GetMethodPointer(Unity::il2cppClass* m_pClass, const char* m_pMethodName, int m_iArgs)
+            {
+                Unity::il2cppMethodInfo* pMethod = reinterpret_cast<Unity::il2cppMethodInfo * (IL2CPP_CALLING_CONVENTION)(void*, const char*, int)>(Data.Functions.m_pClassGetMethodFromName)(m_pClass, m_pMethodName, m_iArgs);
+                if (!pMethod) return nullptr;
+
+                return pMethod->m_pMethodPointer;
+            }
         }
 	}
 }

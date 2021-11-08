@@ -21,6 +21,8 @@ namespace IL2CPP
 			int GetFieldOffset(Unity::il2cppClass* m_pClass, const char* m_pName);
 
 			int GetFieldOffset(const char* m_pClassName, const char* m_pName);
+
+			void* GetMethodPointer(Unity::il2cppClass* m_pClass, const char* m_pMethodName, int m_iArgs = -1);
 		}
 	}
 
@@ -49,6 +51,11 @@ namespace IL2CPP
 			Class::FetchFields(m_Object.m_pClass, m_pVector, m_pFieldIterator);
 		}
 
+		void* GetMethodPointer(const char* m_pMethodName, int m_iArgs = -1)
+		{
+			Class::Utils::GetMethodPointer(m_Object.m_pClass, m_pMethodName, m_iArgs);
+		}
+
 		m_eClassPropType GetPropType(const char* m_pPropType)
 		{
 			Unity::il2cppFieldInfo* pField = reinterpret_cast<Unity::il2cppFieldInfo*(IL2CPP_CALLING_CONVENTION)(void*, const char*)>(Data.Functions.m_pClassGetFieldFromName)(m_Object.m_pClass, m_pPropType);
@@ -66,15 +73,6 @@ namespace IL2CPP
 			return m_eClassPropType::Unknown;
 		}
 		
-		// This function is used to get pointer to function of desired class
-		void* GetMethodPointer(const char* m_MethodName, int iArgs = -1)
-		{
-			Unity::il2cppMethodInfo* pMethod = reinterpret_cast<Unity::il2cppMethodInfo*(IL2CPP_CALLING_CONVENTION)(void*, const char*, int)>(Data.Functions.m_pClassGetMethodFromName)(m_Object.m_pClass, m_MethodName, iArgs);
-			if (!pMethod) return nullptr;
-
-			return pMethod->m_pMethodPointer;
-		}
-
 		template<typename TReturn, typename... TArgs>
 		TReturn CallMethod(const char* m_pMethodName, TArgs... tArgs)
 		{

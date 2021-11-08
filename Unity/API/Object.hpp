@@ -35,7 +35,7 @@ namespace Unity
 		}
 
 		template<typename T>
-		static il2cppArray<T>* FindObjectsOfType(const char* m_pSystemTypeName)
+		static il2cppArray<T*>* FindObjectsOfType(const char* m_pSystemTypeName)
 		{
 			il2cppClass* pClass = IL2CPP::Class::Find(m_pSystemTypeName);
 			if (!pClass) return nullptr;
