@@ -134,5 +134,83 @@ namespace IL2CPP
 
 			SetPropertyValue<T>(m_pMemberName, m_tValue);
 		}
+
+		template<typename T>
+		T GetObscuredValue(const char* m_pMemberName)
+		{
+			Unity::il2cppFieldInfo* pField = reinterpret_cast<Unity::il2cppFieldInfo * (IL2CPP_CALLING_CONVENTION)(void*, const char*)>(Data.Functions.m_pClassGetFieldFromName)(m_Object.m_pClass, m_pMemberName);
+			if (pField && pField->m_iOffset >= 0)
+			{
+				switch (sizeof(T))
+				{
+					case sizeof(double):
+					{
+						long long m_lKey = *reinterpret_cast<long long*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset);
+						long long m_lValue = *reinterpret_cast<long long*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset + sizeof(m_lKey));
+
+						m_lValue ^= m_lKey;
+						return *reinterpret_cast<T*>(&m_lValue);
+					}
+					break;
+					case sizeof(int):
+					{
+						int m_iKey = *reinterpret_cast<int*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset);
+						int m_iValue = *reinterpret_cast<int*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset + sizeof(m_iKey));
+
+						m_iValue ^= m_iKey;
+						return *reinterpret_cast<T*>(&m_iValue);
+					}
+					break;
+					case sizeof(bool):
+					{
+						unsigned char m_uKey = *reinterpret_cast<unsigned char*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset);
+						int m_iValue = *reinterpret_cast<int*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset + sizeof(m_uKey));
+
+						m_iValue ^= m_uKey;
+						return *reinterpret_cast<T*>(&m_iValue);
+					}
+					break;
+				}
+			}
+
+			T m_tDefault = { 0 };
+			return m_tDefault;
+		}
+
+		template<typename T>
+		void SetObscuredValue(const char* m_pMemberName, T m_tValue)
+		{
+			Unity::il2cppFieldInfo* pField = reinterpret_cast<Unity::il2cppFieldInfo * (IL2CPP_CALLING_CONVENTION)(void*, const char*)>(Data.Functions.m_pClassGetFieldFromName)(m_Object.m_pClass, m_pMemberName);
+			if (!pField || 0 > pField->m_iOffset)
+				return;
+			
+			switch (sizeof(T))
+			{
+				case sizeof(double):
+				{
+					long long m_lKey = *reinterpret_cast<long long*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset);
+					long long* m_pValue = reinterpret_cast<long long*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset + sizeof(m_lKey));
+
+					*m_pValue = *reinterpret_cast<long long*>(&m_tValue) ^ m_lKey;
+				}
+				break;
+				case sizeof(int):
+				{
+					int m_iKey = *reinterpret_cast<int*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset);
+					int* m_pValue = reinterpret_cast<int*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset + sizeof(m_iKey));
+
+					*m_pValue = *reinterpret_cast<int*>(&m_tValue) ^ m_iKey;
+				}
+				break;
+				case sizeof(bool):
+				{
+					unsigned char m_uKey = *reinterpret_cast<unsigned char*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset);
+					int* m_pValue = reinterpret_cast<int*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset + sizeof(m_uKey));
+
+					*m_pValue = *reinterpret_cast<int*>(&m_tValue) ^ m_uKey;
+				}
+				break;
+			}
+		}
 	};
 }
