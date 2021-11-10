@@ -8,6 +8,10 @@ namespace IL2CPP
 
 		void FetchFields(Unity::il2cppClass* m_pClass, std::vector<Unity::il2cppFieldInfo*>* m_pVector, void* m_pFieldIterator = nullptr);
 
+		Unity::il2cppMethodInfo* GetMethods(Unity::il2cppClass* m_pClass, void** m_pIterator);
+
+		void FetchMethods(Unity::il2cppClass* m_pClass, std::vector<Unity::il2cppMethodInfo*>* m_pVector, void* m_pFieldIterator = nullptr);
+
 		Unity::il2cppType* GetType(Unity::il2cppClass* m_pClass);
 
 		Unity::il2cppObject* GetSystemType(Unity::il2cppClass* m_pClass);
@@ -51,6 +55,16 @@ namespace IL2CPP
 		void FetchFields(std::vector<Unity::il2cppFieldInfo*>* m_pVector, void* m_pFieldIterator = nullptr)
 		{
 			Class::FetchFields(m_Object.m_pClass, m_pVector, m_pFieldIterator);
+		}
+
+		Unity::il2cppMethodInfo* GetMethods(void** m_pIterator)
+		{
+			return Class::GetMethods(m_Object.m_pClass, m_pIterator);
+		}
+
+		void FetchMethods(std::vector<Unity::il2cppMethodInfo*>* m_pVector, void* m_pFieldIterator = nullptr)
+		{
+			Class::FetchMethods(m_Object.m_pClass, m_pVector, m_pFieldIterator);
 		}
 
 		void* GetMethodPointer(const char* m_pMethodName, int m_iArgs = -1)
@@ -136,17 +150,16 @@ namespace IL2CPP
 		}
 
 		template<typename T>
-		T GetObscuredValue(const char* m_pMemberName)
+		__inline T GetObscuredViaOffset(int m_iOffset)
 		{
-			Unity::il2cppFieldInfo* pField = reinterpret_cast<Unity::il2cppFieldInfo * (IL2CPP_CALLING_CONVENTION)(void*, const char*)>(Data.Functions.m_pClassGetFieldFromName)(m_Object.m_pClass, m_pMemberName);
-			if (pField && pField->m_iOffset >= 0)
+			if (m_iOffset >= 0)
 			{
 				switch (sizeof(T))
 				{
 					case sizeof(double):
 					{
-						long long m_lKey = *reinterpret_cast<long long*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset);
-						long long m_lValue = *reinterpret_cast<long long*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset + sizeof(m_lKey));
+						long long m_lKey = *reinterpret_cast<long long*>(reinterpret_cast<uintptr_t>(this) + m_iOffset);
+						long long m_lValue = *reinterpret_cast<long long*>(reinterpret_cast<uintptr_t>(this) + m_iOffset + sizeof(m_lKey));
 
 						m_lValue ^= m_lKey;
 						return *reinterpret_cast<T*>(&m_lValue);
@@ -154,8 +167,8 @@ namespace IL2CPP
 					break;
 					case sizeof(int):
 					{
-						int m_iKey = *reinterpret_cast<int*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset);
-						int m_iValue = *reinterpret_cast<int*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset + sizeof(m_iKey));
+						int m_iKey = *reinterpret_cast<int*>(reinterpret_cast<uintptr_t>(this) + m_iOffset);
+						int m_iValue = *reinterpret_cast<int*>(reinterpret_cast<uintptr_t>(this) + m_iOffset + sizeof(m_iKey));
 
 						m_iValue ^= m_iKey;
 						return *reinterpret_cast<T*>(&m_iValue);
@@ -163,8 +176,8 @@ namespace IL2CPP
 					break;
 					case sizeof(bool):
 					{
-						unsigned char m_uKey = *reinterpret_cast<unsigned char*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset);
-						int m_iValue = *reinterpret_cast<int*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset + sizeof(m_uKey));
+						unsigned char m_uKey = *reinterpret_cast<unsigned char*>(reinterpret_cast<uintptr_t>(this) + m_iOffset);
+						int m_iValue = *reinterpret_cast<int*>(reinterpret_cast<uintptr_t>(this) + m_iOffset + sizeof(m_uKey));
 
 						m_iValue ^= m_uKey;
 						return *reinterpret_cast<T*>(&m_iValue);
@@ -178,39 +191,55 @@ namespace IL2CPP
 		}
 
 		template<typename T>
-		void SetObscuredValue(const char* m_pMemberName, T m_tValue)
+		T GetObscuredValue(const char* m_pMemberName)
 		{
-			Unity::il2cppFieldInfo* pField = reinterpret_cast<Unity::il2cppFieldInfo * (IL2CPP_CALLING_CONVENTION)(void*, const char*)>(Data.Functions.m_pClassGetFieldFromName)(m_Object.m_pClass, m_pMemberName);
-			if (!pField || 0 > pField->m_iOffset)
+			Unity::il2cppFieldInfo* m_pField = reinterpret_cast<Unity::il2cppFieldInfo*(IL2CPP_CALLING_CONVENTION)(void*, const char*)>(Data.Functions.m_pClassGetFieldFromName)(m_Object.m_pClass, m_pMemberName);	
+			return GetObscuredViaOffset<T>(m_pField ? m_pField->m_iOffset : -1);
+		}
+
+		template<typename T>
+		__inline void SetObscuredViaOffset(int m_iOffset, T m_tValue)
+		{
+			if (0 > m_iOffset)
 				return;
-			
+
 			switch (sizeof(T))
 			{
 				case sizeof(double):
 				{
-					long long m_lKey = *reinterpret_cast<long long*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset);
-					long long* m_pValue = reinterpret_cast<long long*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset + sizeof(m_lKey));
+					long long m_lKey = *reinterpret_cast<long long*>(reinterpret_cast<uintptr_t>(this) + m_iOffset);
+					long long* m_pValue = reinterpret_cast<long long*>(reinterpret_cast<uintptr_t>(this) + m_iOffset + sizeof(m_lKey));
 
 					*m_pValue = *reinterpret_cast<long long*>(&m_tValue) ^ m_lKey;
 				}
 				break;
 				case sizeof(int):
 				{
-					int m_iKey = *reinterpret_cast<int*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset);
-					int* m_pValue = reinterpret_cast<int*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset + sizeof(m_iKey));
+					int m_iKey = *reinterpret_cast<int*>(reinterpret_cast<uintptr_t>(this) + m_iOffset);
+					int* m_pValue = reinterpret_cast<int*>(reinterpret_cast<uintptr_t>(this) + m_iOffset + sizeof(m_iKey));
 
 					*m_pValue = *reinterpret_cast<int*>(&m_tValue) ^ m_iKey;
 				}
 				break;
 				case sizeof(bool):
 				{
-					unsigned char m_uKey = *reinterpret_cast<unsigned char*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset);
-					int* m_pValue = reinterpret_cast<int*>(reinterpret_cast<uintptr_t>(this) + pField->m_iOffset + sizeof(m_uKey));
+					unsigned char m_uKey = *reinterpret_cast<unsigned char*>(reinterpret_cast<uintptr_t>(this) + m_iOffset);
+					int* m_pValue = reinterpret_cast<int*>(reinterpret_cast<uintptr_t>(this) + m_iOffset + sizeof(m_uKey));
 
 					*m_pValue = *reinterpret_cast<int*>(&m_tValue) ^ m_uKey;
 				}
 				break;
 			}
+		}
+
+		template<typename T>
+		void SetObscuredValue(const char* m_pMemberName, T m_tValue)
+		{
+			Unity::il2cppFieldInfo* m_pField = reinterpret_cast<Unity::il2cppFieldInfo*(IL2CPP_CALLING_CONVENTION)(void*, const char*)>(Data.Functions.m_pClassGetFieldFromName)(m_Object.m_pClass, m_pMemberName);
+			if (!m_pField)
+				return;
+			
+			SetObscuredViaOffset<T>(m_pField->m_iOffset, m_tValue);
 		}
 	};
 }

@@ -23,6 +23,25 @@ namespace IL2CPP
             }
         }
 
+        Unity::il2cppMethodInfo* GetMethods(Unity::il2cppClass* m_pClass, void** m_pIterator)
+        {
+            return reinterpret_cast<Unity::il2cppMethodInfo*(IL2CPP_CALLING_CONVENTION)(void*, void**)>(Data.Functions.m_pClassGetMethods)(m_pClass, m_pIterator);
+        }
+
+        void FetchMethods(Unity::il2cppClass* m_pClass, std::vector<Unity::il2cppMethodInfo*>* m_pVector, void* m_pFieldIterator)
+        {
+            m_pVector->clear();
+
+            while (1)
+            {
+                Unity::il2cppMethodInfo* m_pField = GetMethods(m_pClass, &m_pFieldIterator);
+                if (!m_pField)
+                    break;
+
+                m_pVector->emplace_back(m_pField);
+            }
+        }
+
         Unity::il2cppType* GetType(Unity::il2cppClass* m_pClass)
         {
             return reinterpret_cast<Unity::il2cppType*(IL2CPP_CALLING_CONVENTION)(void*)>(Data.Functions.m_pClassGetType)(m_pClass);
