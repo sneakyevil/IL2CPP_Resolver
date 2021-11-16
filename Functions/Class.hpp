@@ -10,7 +10,7 @@ namespace IL2CPP
 
 		Unity::il2cppMethodInfo* GetMethods(Unity::il2cppClass* m_pClass, void** m_pIterator);
 
-		void FetchMethods(Unity::il2cppClass* m_pClass, std::vector<Unity::il2cppMethodInfo*>* m_pVector, void* m_pFieldIterator = nullptr);
+		void FetchMethods(Unity::il2cppClass* m_pClass, std::vector<Unity::il2cppMethodInfo*>* m_pVector, void* m_pMethodIterator = nullptr);
 
 		Unity::il2cppType* GetType(Unity::il2cppClass* m_pClass);
 
@@ -19,6 +19,12 @@ namespace IL2CPP
 		Unity::il2cppClass* GetFromName(Unity::il2cppImage* m_pImage, const char* m_pNamespace, const char* m_pName);
 
 		Unity::il2cppClass* Find(const char* m_pName);
+
+		/*
+		*   If you wanna fetch modules with custom classes use modulename: Assembly-CSharp
+		*   Nullptr namespace == pass any namespace
+		*/
+		void FetchClasses(std::vector<Unity::il2cppClass*>* m_pVector, const char* m_pModuleName, const char* m_pNamespace);
 
 		namespace Utils
 		{
@@ -62,9 +68,9 @@ namespace IL2CPP
 			return Class::GetMethods(m_Object.m_pClass, m_pIterator);
 		}
 
-		void FetchMethods(std::vector<Unity::il2cppMethodInfo*>* m_pVector, void* m_pFieldIterator = nullptr)
+		void FetchMethods(std::vector<Unity::il2cppMethodInfo*>* m_pVector, void* m_pMethodIterator = nullptr)
 		{
-			Class::FetchMethods(m_Object.m_pClass, m_pVector, m_pFieldIterator);
+			Class::FetchMethods(m_Object.m_pClass, m_pVector, m_pMethodIterator);
 		}
 
 		void* GetMethodPointer(const char* m_pMethodName, int m_iArgs = -1)

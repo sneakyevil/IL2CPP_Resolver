@@ -20,6 +20,8 @@
 #define IL2CPP_DOMAIN_GET_EXPORT						"il2cpp_domain_get"
 #define IL2CPP_DOMAIN_GET_ASSEMBLIES_EXPORT				"il2cpp_domain_get_assemblies"
 #define IL2CPP_FREE_EXPORT								"il2cpp_free"
+#define IL2CPP_IMAGE_GET_CLASS_EXPORT					"il2cpp_image_get_class"
+#define IL2CPP_IMAGE_GET_CLASS_COUNT_EXPORT				"il2cpp_image_get_class_count"
 #define IL2CPP_RESOLVE_FUNC_EXPORT						"il2cpp_resolve_icall"
 #define IL2CPP_STRING_NEW_EXPORT						"il2cpp_string_new"
 #define IL2CPP_THREAD_ATTACH_EXPORT						"il2cpp_thread_attach"

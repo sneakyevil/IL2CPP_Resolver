@@ -18,6 +18,8 @@ namespace IL2CPP
 			void* m_pDomainGet = nullptr;
 			void* m_pDomainGetAssemblies = nullptr;
 			void* m_pFree = nullptr;
+			void* m_pImageGetClass = nullptr;
+			void* m_pImageGetClassCount = nullptr;
 			void* m_pResolveFunction = nullptr;
 			void* m_pStringNew = nullptr;
 			void* m_pThreadAttach = nullptr;

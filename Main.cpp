@@ -92,6 +92,8 @@ namespace IL2CPP
 				{ IL2CPP_DOMAIN_GET_EXPORT,						&Data.Functions.m_pDomainGet },
 				{ IL2CPP_DOMAIN_GET_ASSEMBLIES_EXPORT,			&Data.Functions.m_pDomainGetAssemblies },
 				{ IL2CPP_FREE_EXPORT,							&Data.Functions.m_pFree },
+				{ IL2CPP_IMAGE_GET_CLASS_EXPORT,				&Data.Functions.m_pImageGetClass },
+				{ IL2CPP_IMAGE_GET_CLASS_COUNT_EXPORT,			&Data.Functions.m_pImageGetClassCount },
 				{ IL2CPP_RESOLVE_FUNC_EXPORT,					&Data.Functions.m_pResolveFunction },
 				{ IL2CPP_STRING_NEW_EXPORT,						&Data.Functions.m_pStringNew },
 				{ IL2CPP_THREAD_ATTACH_EXPORT,					&Data.Functions.m_pThreadAttach },

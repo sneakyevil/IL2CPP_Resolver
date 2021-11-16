@@ -28,13 +28,13 @@ namespace IL2CPP
             return reinterpret_cast<Unity::il2cppMethodInfo*(IL2CPP_CALLING_CONVENTION)(void*, void**)>(Data.Functions.m_pClassGetMethods)(m_pClass, m_pIterator);
         }
 
-        void FetchMethods(Unity::il2cppClass* m_pClass, std::vector<Unity::il2cppMethodInfo*>* m_pVector, void* m_pFieldIterator)
+        void FetchMethods(Unity::il2cppClass* m_pClass, std::vector<Unity::il2cppMethodInfo*>* m_pVector, void* m_pMethodIterator)
         {
             m_pVector->clear();
 
             while (1)
             {
-                Unity::il2cppMethodInfo* m_pField = GetMethods(m_pClass, &m_pFieldIterator);
+                Unity::il2cppMethodInfo* m_pField = GetMethods(m_pClass, &m_pMethodIterator);
                 if (!m_pField)
                     break;
 
@@ -93,6 +93,47 @@ namespace IL2CPP
             delete[] m_pNameSpace;
             return m_pClassReturn;
 		}
+
+        void FetchClasses(std::vector<Unity::il2cppClass*>* m_pVector, const char* m_pModuleName, const char* m_pNamespace)
+        {
+            m_pVector->clear();
+
+            size_t m_sAssembliesCount = 0U;
+            Unity::il2cppAssembly** m_pAssemblies = Domain::GetAssemblies(&m_sAssembliesCount);
+            if (!m_pAssemblies || 0U >= m_sAssembliesCount) return;
+
+            Unity::il2cppImage* m_pImage = nullptr;
+            for (size_t i = 0U; m_sAssembliesCount > i; ++i)
+            {
+                Unity::il2cppAssembly* m_pAssembly = m_pAssemblies[i];
+                if (!m_pAssembly || !m_pAssembly->m_pImage || strcmp(m_pAssembly->m_pImage->m_pNameNoExt, m_pModuleName) != 0)
+                    continue;
+
+                m_pImage = m_pAssembly->m_pImage;
+                break;
+            }
+
+            if (m_pImage)
+            {
+                size_t m_sClassesCount = reinterpret_cast<size_t(IL2CPP_CALLING_CONVENTION)(void*)>(Data.Functions.m_pImageGetClassCount)(m_pImage);
+                for (size_t i = 0U; m_sClassesCount > i; ++i)
+                {
+                    Unity::il2cppClass* m_pClass = reinterpret_cast<Unity::il2cppClass*(IL2CPP_CALLING_CONVENTION)(void*, size_t)>(Data.Functions.m_pImageGetClass)(m_pImage, i);
+                    if (m_pNamespace)
+                    {
+                        if (m_pNamespace[0] == '\0')
+                        {
+                            if (m_pClass->m_pNamespace[0] != '\0')
+                                continue;
+                        }
+                        else if (strcmp(m_pClass->m_pNamespace, m_pNamespace) != 0)
+                            continue;
+                    }
+
+                    m_pVector->emplace_back(m_pClass);
+                }
+            }
+        }
 
         namespace Utils
         {
