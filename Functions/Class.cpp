@@ -34,11 +34,11 @@ namespace IL2CPP
 
             while (1)
             {
-                Unity::il2cppMethodInfo* m_pField = GetMethods(m_pClass, &m_pMethodIterator);
-                if (!m_pField)
+                Unity::il2cppMethodInfo* m_pMethod = GetMethods(m_pClass, &m_pMethodIterator);
+                if (!m_pMethod)
                     break;
 
-                m_pVector->emplace_back(m_pField);
+                m_pVector->emplace_back(m_pMethod);
             }
         }
 
