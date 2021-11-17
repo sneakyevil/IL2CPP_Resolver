@@ -35,6 +35,13 @@ namespace IL2CPP
 			void* GetMethodPointer(Unity::il2cppClass* m_pClass, const char* m_pMethodName, int m_iArgs = -1);
 
 			void* GetMethodPointer(const char* m_pClassName, const char* m_pMethodName, int m_iArgs = -1);
+
+			/*
+			*	Name Prefixes
+			*		(Field)  ~
+			*		(Method) -
+			*/
+			Unity::il2cppClass* FilterClass(std::vector<Unity::il2cppClass*>* m_pClasses, std::initializer_list<const char*> m_vNames, int m_iFoundCount = -1);
 		}
 	}
 

@@ -150,7 +150,7 @@ namespace IL2CPP
                         return m_pField->m_iOffset;
                 }
 
-                return 0;
+                return -1;
             }
 
             int GetFieldOffset(const char* m_pClassName, const char* m_pName)
@@ -159,7 +159,7 @@ namespace IL2CPP
                 if (m_pClass)
                     return GetFieldOffset(m_pClass, m_pName);
 
-                return 0;
+                return -1;
             }
 
             void* GetMethodPointer(Unity::il2cppClass* m_pClass, const char* m_pMethodName, int m_iArgs)
@@ -177,6 +177,53 @@ namespace IL2CPP
                     return GetMethodPointer(m_pClass, m_pMethodName, m_iArgs);
 
                 return nullptr;
+            }
+
+            Unity::il2cppClass* FilterClass(std::vector<Unity::il2cppClass*>* m_pClasses, std::initializer_list<const char*> m_vNames, int m_iFoundCount)
+            {
+                int m_iNamesCount = static_cast<int>(m_vNames.size());
+                const char** m_pNames = const_cast<const char**>(m_vNames.begin());
+
+                if (0 >= m_iFoundCount || m_iFoundCount > m_iNamesCount)
+                    m_iFoundCount = m_iNamesCount;
+
+                Unity::il2cppClass* m_pReturn = nullptr;
+                for (size_t c = 0; m_pClasses->size() > c; ++c)
+                {
+                    int m_iFoundCountNow = 0;
+
+                    Unity::il2cppClass* m_pClass = m_pClasses->operator[](c);
+                    if (!m_pClass)
+                        continue;
+
+                    for (int i = 0; m_iNamesCount > i; ++i)
+                    {
+                        const char* m_pNameToFind = m_pNames[i];
+
+                        bool m_bFoundInClass = false;
+                        if (m_pNameToFind[0] == '~') // Field
+                            m_bFoundInClass = GetFieldOffset(m_pClass, &m_pNameToFind[1]) >= 0;
+                        else if (m_pNameToFind[0] == '-') // Method
+                            m_bFoundInClass = GetMethodPointer(m_pClass, &m_pNameToFind[1]) != nullptr;
+                        else // Both
+                        {
+                            m_bFoundInClass = GetFieldOffset(m_pClass, m_pNameToFind) >= 0;
+                            if (!m_bFoundInClass)
+                                m_bFoundInClass = GetMethodPointer(m_pClass, m_pNameToFind) != nullptr;
+                        }
+
+                        if (m_bFoundInClass)
+                            ++m_iFoundCountNow;
+                    }
+
+                    if (m_iFoundCount == m_iFoundCountNow)
+                    {
+                        m_pReturn = m_pClass;
+                        break;
+                    }
+                }
+
+                return m_pReturn;
             }
         }
 	}
