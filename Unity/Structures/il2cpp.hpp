@@ -149,4 +149,11 @@ namespace Unity
 		uintptr_t m_uMaxLength;
 		T m_pArray[65536];
 	};
+
+	template<typename T>
+	struct il2cppList
+	{
+		il2cppObject m_Object;
+		il2cppArray<T>* m_pListArray;
+	};
 }
