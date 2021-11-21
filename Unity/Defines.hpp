@@ -31,6 +31,10 @@
 
 // Transform
 #define UNITY_TRANSFORM_CLASS										"UnityEngine.Transform"
+#define UNITY_TRANSFORM_GETPARENT                                   UNITY_TRANSFORM_CLASS"::GetParent"
+#define UNITY_TRANSFORM_GETROOT                                     UNITY_TRANSFORM_CLASS"::GetRoot"
+#define UNITY_TRANSFORM_GETCHILD                                    UNITY_TRANSFORM_CLASS"::GetChild"
+#define UNITY_TRANSFORM_GETCHILDCOUNT                               UNITY_TRANSFORM_CLASS"::get_childCount"
 #define UNITY_TRANSFORM_GETPOSITION									UNITY_TRANSFORM_CLASS"::get_position_Injected"
 #define UNITY_TRANSFORM_GETLOCALPOSITION							UNITY_TRANSFORM_CLASS"::get_localPosition_Injected"
 #define UNITY_TRANSFORM_GETLOCALROTATION							UNITY_TRANSFORM_CLASS"::get_localRotation_Injected"

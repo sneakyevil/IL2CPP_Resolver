@@ -8,6 +8,10 @@ namespace Unity
 	{
 		void Initialize()
 		{
+			TransformFunctions.m_pGetParent = IL2CPP::ResolveCall(UNITY_TRANSFORM_GETPARENT);
+			TransformFunctions.m_pGetRoot = IL2CPP::ResolveCall(UNITY_TRANSFORM_GETROOT);
+			TransformFunctions.m_pGetChild = IL2CPP::ResolveCall(UNITY_TRANSFORM_GETCHILD);
+			TransformFunctions.m_pGetChildCount = IL2CPP::ResolveCall(UNITY_TRANSFORM_GETCHILDCOUNT);
 			TransformFunctions.m_pGetPosition = IL2CPP::ResolveCall(UNITY_TRANSFORM_GETPOSITION);
 			TransformFunctions.m_pGetLocalPosition = IL2CPP::ResolveCall(UNITY_TRANSFORM_GETLOCALPOSITION);
 			TransformFunctions.m_pGetLocalRotation = IL2CPP::ResolveCall(UNITY_TRANSFORM_GETLOCALROTATION);
