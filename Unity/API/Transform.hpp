@@ -34,7 +34,7 @@ namespace Unity
 
 		CTransform* GetChild(int m_iIndex)
 		{
-			return reinterpret_cast<CTransform*(UNITY_CALLING_CONVENTION)(void*, int)>(TransformFunctions.m_pGetRoot)(this, m_iIndex);
+			return reinterpret_cast<CTransform*(UNITY_CALLING_CONVENTION)(void*, int)>(TransformFunctions.m_pGetChild)(this, m_iIndex);
 		}
 
 		int GetChildCount()
