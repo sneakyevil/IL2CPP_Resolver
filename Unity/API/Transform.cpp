@@ -8,6 +8,8 @@ namespace Unity
 	{
 		void Initialize()
 		{
+			IL2CPP::SystemTypeCache::Initializer::Add(UNITY_TRANSFORM_CLASS);
+
 			TransformFunctions.m_pGetParent = IL2CPP::ResolveCall(UNITY_TRANSFORM_GETPARENT);
 			TransformFunctions.m_pGetRoot = IL2CPP::ResolveCall(UNITY_TRANSFORM_GETROOT);
 			TransformFunctions.m_pGetChild = IL2CPP::ResolveCall(UNITY_TRANSFORM_GETCHILD);

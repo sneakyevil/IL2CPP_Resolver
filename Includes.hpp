@@ -14,6 +14,7 @@
 
 // IL2CPP API
 #include "Data.hpp" // Pointers, Variables, etc...
+#include "Cache.hpp"
 
 // IL2CPP
 #include "Functions/Class.hpp"

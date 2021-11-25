@@ -37,10 +37,10 @@ namespace Unity
 		template<typename T>
 		static il2cppArray<T*>* FindObjectsOfType(const char* m_pSystemTypeName)
 		{
-			il2cppClass* pClass = IL2CPP::Class::Find(m_pSystemTypeName);
-			if (!pClass) return nullptr;
+			il2cppClass* m_pClass = IL2CPP::Class::Find(m_pSystemTypeName);
+			if (!m_pClass) return nullptr;
 
-			return FindObjectsOfType<T>(IL2CPP::Class::GetSystemType(pClass));
+			return FindObjectsOfType<T>(IL2CPP::Class::GetSystemType(m_pClass));
 		}
 
 		template<typename T>
@@ -50,6 +50,15 @@ namespace Unity
 			if (!m_pArray || m_pArray->m_uMaxLength == 0U) return nullptr;
 
 			return m_pArray->m_Object[0];
+		}
+
+		template<typename T>
+		static T* FindObjectOfType(const char* m_pSystemTypeName)
+		{
+			il2cppClass* m_pClass = IL2CPP::Class::Find(m_pSystemTypeName);
+			if (!m_pClass) return nullptr;
+
+			return FindObjectOfType<T>(IL2CPP::Class::GetSystemType(m_pClass));
 		}
 	}
 }

@@ -16,6 +16,8 @@ namespace IL2CPP
 
 		Unity::il2cppObject* GetSystemType(Unity::il2cppClass* m_pClass);
 
+		Unity::il2cppObject* GetSystemType(const char* m_pClassName);
+
 		Unity::il2cppClass* GetFromName(Unity::il2cppImage* m_pImage, const char* m_pNamespace, const char* m_pName);
 
 		Unity::il2cppClass* Find(const char* m_pName);

@@ -30,15 +30,24 @@ namespace Unity
 
 		il2cppArray<CComponent*>* GetComponents(il2cppObject* m_pSystemType)
 		{
+			/* 
+			0 - Object
+			1 - Type
+			2 - Use search type as array return type
+			3 - Recursive
+			4 - Include inactive
+			5 - Reverse
+			6 - Result list
+			*/
 			return reinterpret_cast<Unity::il2cppArray<CComponent*>*(UNITY_CALLING_CONVENTION)(void*, void*, bool, bool, bool, bool, void*)>(GameObjectFunctions.m_pGetComponents)(this, m_pSystemType, false, false, true, false, nullptr);
 		}
 
 		il2cppArray<CComponent*>* GetComponents(const char* m_pSystemTypeName)
 		{
-			il2cppClass* pClass = IL2CPP::Class::Find(m_pSystemTypeName);
-			if (!pClass) return nullptr;
+			il2cppClass* m_pClass = IL2CPP::Class::Find(m_pSystemTypeName);
+			if (!m_pClass) return nullptr;
 
-			return GetComponents(IL2CPP::Class::GetSystemType(pClass));
+			return GetComponents(IL2CPP::Class::GetSystemType(m_pClass));
 		}
 
 		CTransform* GetTransform()

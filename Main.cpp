@@ -114,6 +114,9 @@ namespace IL2CPP
 			Unity::Object::Initialize();
 			Unity::Transform::Initialize();
 
+			// Caches
+			IL2CPP::SystemTypeCache::Initializer::PreCache();
+
 			return true;
 		}
 	}

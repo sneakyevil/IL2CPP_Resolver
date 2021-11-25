@@ -8,6 +8,8 @@ namespace Unity
 	{
 		void Initialize()
 		{
+			IL2CPP::SystemTypeCache::Initializer::Add(UNITY_GAMEOBJECT_CLASS);
+
 			GameObjectFunctions.m_pAddComponent = IL2CPP::ResolveCall(UNITY_GAMEOBJECT_ADDCOMPONENT);
 			GameObjectFunctions.m_pCreatePrimitive = IL2CPP::ResolveCall(UNITY_GAMEOBJECT_CREATEPRIMITIVE);
 			GameObjectFunctions.m_pFind = IL2CPP::ResolveCall(UNITY_GAMEOBJECT_FIND);

@@ -52,6 +52,15 @@ namespace IL2CPP
             return reinterpret_cast<Unity::il2cppObject*(IL2CPP_CALLING_CONVENTION)(void*)>(Data.Functions.m_pTypeGetObject)(GetType(m_pClass));
         }
 
+        Unity::il2cppObject* GetSystemType(const char* m_pClassName)
+        {
+            Unity::il2cppClass* m_pClass = Find(m_pClassName);
+            if (!m_pClass)
+                return nullptr;
+
+            return GetSystemType(m_pClass);
+        }
+
         Unity::il2cppClass* GetFromName(Unity::il2cppImage* m_pImage, const char* m_pNamespace, const char* m_pName)
         {
             return reinterpret_cast<Unity::il2cppClass*(IL2CPP_CALLING_CONVENTION)(void*, const char*, const char*)>(Data.Functions.m_pClassFromName)(m_pImage, m_pNamespace, m_pName);
