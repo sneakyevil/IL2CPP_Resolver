@@ -12,6 +12,7 @@ namespace Unity
 		void* m_pGetLayer = nullptr;
 		void* m_pGetTransform = nullptr;
 		void* m_pSetLayer = nullptr;
+		void* m_pSetActive = nullptr;
 	};
 	extern SGameObjectFunctions GameObjectFunctions;
 
@@ -63,6 +64,11 @@ namespace Unity
 		void SetLayer(unsigned int m_uLayer)
 		{
 			reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, unsigned int)>(GameObjectFunctions.m_pSetLayer)(this, m_uLayer);
+		}
+		
+		void SetActive(bool m_bActive)
+		{
+			reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, bool)>(GameObjectFunctions.m_pSetActive)(this, m_bActive);
 		}
 	};
 

@@ -18,6 +18,7 @@ namespace Unity
 			GameObjectFunctions.m_pGetLayer = IL2CPP::ResolveCall(UNITY_GAMEOBJECT_GETLAYER);
 			GameObjectFunctions.m_pGetTransform = IL2CPP::ResolveCall(UNITY_GAMEOBJECT_GETTRANSFORM);
 			GameObjectFunctions.m_pSetLayer = IL2CPP::ResolveCall(UNITY_GAMEOBJECT_SETLAYER);
+			GameObjectFunctions.m_pSetActive = IL2CPP::ResolveCall(UNITY_GAMEOBJECT_SETACTIVE);
 		}
 
 		CGameObject* CreatePrimitive(m_ePrimitiveType m_eType)
