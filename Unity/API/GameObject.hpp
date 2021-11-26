@@ -66,14 +66,9 @@ namespace Unity
 			reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, unsigned int)>(GameObjectFunctions.m_pSetLayer)(this, m_uLayer);
 		}
 		
-		void SetActive(bool active)
+		void SetActive(bool m_bActive)
 		{
-			reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, bool)>(GameObjectFunctions.m_pSetActive)(this, active);
-		}
-
-		bool GetActive()
-		{
-			return this->GetMemberValue<bool>("activeSelf");
+			reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, bool)>(GameObjectFunctions.m_pSetActive)(this, m_bActive);
 		}
 	};
 
