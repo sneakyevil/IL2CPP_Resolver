@@ -84,7 +84,7 @@ namespace IL2CPP
 
 		void* GetMethodPointer(const char* m_pMethodName, int m_iArgs = -1)
 		{
-			Class::Utils::GetMethodPointer(m_Object.m_pClass, m_pMethodName, m_iArgs);
+			return Class::Utils::GetMethodPointer(m_Object.m_pClass, m_pMethodName, m_iArgs);
 		}
 
 		m_eClassPropType GetPropType(const char* m_pPropType)
