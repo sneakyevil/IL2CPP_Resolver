@@ -2,6 +2,16 @@
 // Calling Convention
 #define UNITY_CALLING_CONVENTION __fastcall*
 
+// Camera
+#define UNITY_CAMERA_CLASS                                          "UnityEngine.Camera"
+#define UNITY_CAMERA_GETCURRENT                                     UNITY_CAMERA_CLASS"::get_current"
+#define UNITY_CAMERA_GETMAIN                                        UNITY_CAMERA_CLASS"::get_main"
+#define UNITY_CAMERA_GETDEPTH                                       UNITY_CAMERA_CLASS"::get_depth"
+#define UNITY_CAMERA_SETDEPTH                                       UNITY_CAMERA_CLASS"::set_depth"
+#define UNITY_CAMERA_GETFIELDOFVIEW                                 UNITY_CAMERA_CLASS"::get_fieldOfView"
+#define UNITY_CAMERA_SETFIELDOFVIEW                                 UNITY_CAMERA_CLASS"::set_fieldOfView"
+#define UNITY_CAMERA_WORLDTOSCREEN                                  UNITY_CAMERA_CLASS"::WorldToScreenPoint_Injected"
+
 // Component
 #define UNITY_COMPONENT_CLASS										"UnityEngine.Component"
 #define UNITY_COMPONENT_GETGAMEOBJECT								UNITY_COMPONENT_CLASS"::get_gameObject"

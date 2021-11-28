@@ -52,4 +52,21 @@ namespace Unity
 		Rect() { fX = fY = fWidth = fHeight = 0.f; }
 		Rect(float f1, float f2, float f3, float f4) { fX = f1; fY = f2; fWidth = f3; fHeight = f4; }
 	};
+
+	struct Color
+	{
+		float r, g, b, a;
+
+		Color() { r = g = b = a = 0.f; }
+		Color(float fRed = 0.f, float fGreen = 0.f, float fBlue = 0.f, float fAlpha = 1.f) { r = fRed; g = fGreen; b = fBlue; a = fAlpha; }
+	};
+
+	struct Matrix4x4
+	{
+		float m[4][4] = { 0 };
+
+		Matrix4x4() { }
+
+		float* operator[](int i) { return m[i]; }
+	};
 }

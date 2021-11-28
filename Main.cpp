@@ -108,6 +108,7 @@ namespace IL2CPP
 			}
 
 			// Unity APIs
+			Unity::Camera::Initialize();
 			Unity::Component::Initialize();
 			Unity::GameObject::Initialize();
 			Unity::LayerMask::Initialize();
