@@ -44,6 +44,8 @@ namespace IL2CPP
 			*		(Method) -
 			*/
 			Unity::il2cppClass* FilterClass(std::vector<Unity::il2cppClass*>* m_pClasses, std::initializer_list<const char*> m_vNames, int m_iFoundCount = -1);
+
+			void* FilterClassToMethodPointer(std::vector<Unity::il2cppClass*>* m_pClasses, const char* m_pMethodName, int m_iArgs = -1);
 		}
 	}
 
