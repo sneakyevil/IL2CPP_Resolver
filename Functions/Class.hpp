@@ -126,7 +126,7 @@ namespace IL2CPP
 			if (pProperty && pProperty->m_pGet) 
 				return reinterpret_cast<T(UNITY_CALLING_CONVENTION)(void*)>(pProperty->m_pGet->m_pMethodPointer)(this);
 
-			T tDefault = { 0 };
+			T tDefault = {};
 			return tDefault;
 		}
 
@@ -149,7 +149,7 @@ namespace IL2CPP
 			else
 				return GetPropertyValue<T>(m_pMemberName);
 
-			T tDefault = { 0 };
+			T tDefault = {};
 			return tDefault;
 		}
 
