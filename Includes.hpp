@@ -3,6 +3,8 @@
 // #define IL2CPP_ASSERT(x) ((void)(x))
 #include "Defines.hpp"
 
+#define _USE_MATH_DEFINES
+#include <cmath>
 #include <assert.h>
 #include <unordered_map>
 #define WIN32_LEAN_AND_MEAN

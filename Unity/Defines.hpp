@@ -47,12 +47,12 @@
 #define UNITY_TRANSFORM_GETCHILD                                    UNITY_TRANSFORM_CLASS"::GetChild"
 #define UNITY_TRANSFORM_GETCHILDCOUNT                               UNITY_TRANSFORM_CLASS"::get_childCount"
 #define UNITY_TRANSFORM_GETPOSITION									UNITY_TRANSFORM_CLASS"::get_position_Injected"
+#define UNITY_TRANSFORM_GETROTATION									UNITY_TRANSFORM_CLASS"::get_rotation_Injected"
 #define UNITY_TRANSFORM_GETLOCALPOSITION							UNITY_TRANSFORM_CLASS"::get_localPosition_Injected"
-#define UNITY_TRANSFORM_GETLOCALROTATION							UNITY_TRANSFORM_CLASS"::get_localRotation_Injected"
 #define UNITY_TRANSFORM_GETLOCALSCALE								UNITY_TRANSFORM_CLASS"::get_localScale_Injected"
 #define UNITY_TRANSFORM_SETPOSITION									UNITY_TRANSFORM_CLASS"::set_position_Injected"
+#define UNITY_TRANSFORM_SETROTATION									UNITY_TRANSFORM_CLASS"::set_rotation_Injected"
 #define UNITY_TRANSFORM_SETLOCALPOSITION							UNITY_TRANSFORM_CLASS"::set_localPosition_Injected"
-#define UNITY_TRANSFORM_SETLOCALROTATION							UNITY_TRANSFORM_CLASS"::set_localRotation_Injected"
 #define UNITY_TRANSFORM_SETLOCALSCALE								UNITY_TRANSFORM_CLASS"::set_localScale_Injected"
 
 namespace Unity
