@@ -12,5 +12,6 @@ namespace Unity
 	class CComponent;
 	class CGameObject;
 	class CObject;
+	class CRigidbody;
 	class CTransform;
 }

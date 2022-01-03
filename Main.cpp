@@ -113,6 +113,7 @@ namespace IL2CPP
 			Unity::GameObject::Initialize();
 			Unity::LayerMask::Initialize();
 			Unity::Object::Initialize();
+			Unity::RigidBody::Initialize();
 			Unity::Transform::Initialize();
 
 			// Caches

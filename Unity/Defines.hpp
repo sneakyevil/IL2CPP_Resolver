@@ -40,6 +40,13 @@
 #define UNITY_OBJECT_FINDOBJECTSOFTYPE								UNITY_OBJECT_CLASS"::FindObjectsOfType"
 #define UNITY_OBJECT_GETNAME										UNITY_OBJECT_CLASS"::GetName"
 
+// Rigidbody
+#define UNITY_RIGIDBODY_CLASS										"UnityEngine.Rigidbody"
+#define UNITY_RIGIDBODY_GETDETECTCOLLISIONS                         UNITY_RIGIDBODY_CLASS"::get_detectCollisions"
+#define UNITY_RIGIDBODY_GETVELOCITY                                 UNITY_RIGIDBODY_CLASS"::get_velocity_Injected"
+#define UNITY_RIGIDBODY_SETDETECTCOLLISIONS                         UNITY_RIGIDBODY_CLASS"::set_detectCollisions"
+#define UNITY_RIGIDBODY_SETVELOCITY                                 UNITY_RIGIDBODY_CLASS"::set_velocity_Injected"
+
 // Transform
 #define UNITY_TRANSFORM_CLASS										"UnityEngine.Transform"
 #define UNITY_TRANSFORM_GETPARENT                                   UNITY_TRANSFORM_CLASS"::GetParent"

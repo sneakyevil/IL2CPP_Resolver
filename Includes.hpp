@@ -32,4 +32,5 @@
 #include "Unity/API/Component.hpp"
 #include "Unity/API/GameObject.hpp"
 #include "Unity/API/LayerMask.hpp"
+#include "Unity/API/Rigidbody.hpp"
 #include "Unity/API/Transform.hpp"
