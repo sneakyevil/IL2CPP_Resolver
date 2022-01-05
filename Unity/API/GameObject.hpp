@@ -54,7 +54,7 @@ namespace Unity
 		CComponent* GetComponentByIndex(il2cppObject* m_pSystemType, unsigned int m_uIndex = 0U)
 		{
 			il2cppArray<CComponent*>* m_pComponents = GetComponents(m_pSystemType);
-			if (!m_pComponents || m_pComponents->m_uMaxLength >= m_uIndex) return nullptr;
+			if (!m_pComponents || m_uIndex >= m_pComponents->m_uMaxLength) return nullptr;
 
 			return m_pComponents->operator[](m_uIndex);
 		}
