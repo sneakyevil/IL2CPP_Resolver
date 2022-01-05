@@ -51,6 +51,22 @@ namespace Unity
 			return GetComponents(IL2CPP::Class::GetSystemType(m_pClass));
 		}
 
+		CComponent* GetComponentByIndex(il2cppObject* m_pSystemType, unsigned int m_uIndex = 0U)
+		{
+			il2cppArray<CComponent*>* m_pComponents = GetComponents(m_pSystemType);
+			if (!m_pComponents || m_pComponents->m_uMaxLength >= m_uIndex) return nullptr;
+
+			return m_pComponents->operator[](m_uIndex);
+		}
+
+		CComponent* GetComponentByIndex(const char* m_pSystemTypeName, unsigned int m_uIndex = 0U)
+		{
+			il2cppClass* m_pClass = IL2CPP::Class::Find(m_pSystemTypeName);
+			if (!m_pClass) return nullptr;
+
+			return GetComponentByIndex(IL2CPP::Class::GetSystemType(m_pClass), m_uIndex);
+		}
+
 		CTransform* GetTransform()
 		{
 			return reinterpret_cast<CTransform*(UNITY_CALLING_CONVENTION)(void*)>(GameObjectFunctions.m_pGetTransform)(this);
