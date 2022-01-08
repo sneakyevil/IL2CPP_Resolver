@@ -154,13 +154,13 @@ namespace IL2CPP
 		}
 
 		template<typename T>
-		T GetMemberValue(int m_iOffset)
+		__inline T GetMemberValue(int m_iOffset)
 		{
 			return *reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(this) + m_iOffset);
 		}
 
 		template<typename T>
-		void SetMemberValue(int m_iOffset, T m_tValue)
+		__inline void SetMemberValue(int m_iOffset, T m_tValue)
 		{
 			*reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(this) + m_iOffset) = m_tValue;
 		}
