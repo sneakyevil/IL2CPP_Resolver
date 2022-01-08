@@ -8,7 +8,6 @@ namespace Unity
 		void* m_pGetVelocity = nullptr;
 		void* m_pSetDetectCollisions = nullptr;
 		void* m_pSetVelocity = nullptr;
-
 	};
 	extern SRigidbodyFunctions RigidbodyFunctions;
 

@@ -15,10 +15,11 @@ namespace Unity
 			GameObjectFunctions.m_pFind					= IL2CPP::ResolveCall(UNITY_GAMEOBJECT_FIND);
 			GameObjectFunctions.m_pGetComponent			= IL2CPP::ResolveCall(UNITY_GAMEOBJECT_GETCOMPONENT);
 			GameObjectFunctions.m_pGetComponents		= IL2CPP::ResolveCall(UNITY_GAMEOBJECT_GETCOMPONENTS);
+			GameObjectFunctions.m_pGetActive			= IL2CPP::ResolveCall(UNITY_GAMEOBJECT_GETACTIVE);
 			GameObjectFunctions.m_pGetLayer				= IL2CPP::ResolveCall(UNITY_GAMEOBJECT_GETLAYER);
 			GameObjectFunctions.m_pGetTransform			= IL2CPP::ResolveCall(UNITY_GAMEOBJECT_GETTRANSFORM);
-			GameObjectFunctions.m_pSetLayer				= IL2CPP::ResolveCall(UNITY_GAMEOBJECT_SETLAYER);
 			GameObjectFunctions.m_pSetActive			= IL2CPP::ResolveCall(UNITY_GAMEOBJECT_SETACTIVE);
+			GameObjectFunctions.m_pSetLayer				= IL2CPP::ResolveCall(UNITY_GAMEOBJECT_SETLAYER);
 		}
 
 		CGameObject* CreatePrimitive(m_ePrimitiveType m_eType)

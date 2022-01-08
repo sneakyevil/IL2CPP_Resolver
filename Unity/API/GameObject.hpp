@@ -9,10 +9,11 @@ namespace Unity
 		void* m_pFind = nullptr;
 		void* m_pGetComponent = nullptr;
 		void* m_pGetComponents = nullptr;
+		void* m_pGetActive = nullptr;
 		void* m_pGetLayer = nullptr;
 		void* m_pGetTransform = nullptr;
-		void* m_pSetLayer = nullptr;
 		void* m_pSetActive = nullptr;
+		void* m_pSetLayer = nullptr;
 	};
 	extern SGameObjectFunctions GameObjectFunctions;
 
@@ -72,19 +73,27 @@ namespace Unity
 			return reinterpret_cast<CTransform*(UNITY_CALLING_CONVENTION)(void*)>(GameObjectFunctions.m_pGetTransform)(this);
 		}
 
+		bool GetActive()
+		{
+			return reinterpret_cast<bool(UNITY_CALLING_CONVENTION)(void*)>(GameObjectFunctions.m_pGetActive)(this);
+		}
+
 		unsigned int GetLayer()
 		{
 			return reinterpret_cast<unsigned int(UNITY_CALLING_CONVENTION)(void*)>(GameObjectFunctions.m_pGetLayer)(this);
 		}
 
-		void SetLayer(unsigned int m_uLayer)
-		{
-			reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, unsigned int)>(GameObjectFunctions.m_pSetLayer)(this, m_uLayer);
-		}
-		
+		/*
+		* (WARNING) when you use GameObject::Find and you set the object to unactive, you won't find it anymore with that slow function.
+		*/
 		void SetActive(bool m_bActive)
 		{
 			reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, bool)>(GameObjectFunctions.m_pSetActive)(this, m_bActive);
+		}
+
+		void SetLayer(unsigned int m_uLayer)
+		{
+			reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, unsigned int)>(GameObjectFunctions.m_pSetLayer)(this, m_uLayer);
 		}
 	};
 

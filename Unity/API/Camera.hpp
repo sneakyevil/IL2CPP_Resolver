@@ -14,7 +14,7 @@ namespace Unity
 	};
 	extern SCameraFunctions CameraFunctions;
 
-	class CCamera : public IL2CPP::CClass
+	class CCamera : public CGameObject
 	{
 	public:
 		float GetDepth()
