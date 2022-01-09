@@ -33,22 +33,22 @@ namespace Unity
 			if (m_pForward)
 			{
 				m_pForward->x = m_fCosX * m_fCosY;
-				m_pForward->y = m_fCosX * m_fSinY;
-				m_pForward->z = -m_fSinX;
+				m_pForward->y = -m_fSinX;
+				m_pForward->z = m_fCosX * m_fSinY;
 			}
 
 			if (m_pRight)
 			{
 				m_pRight->x = -1.f * m_fSinZ * m_fSinX * m_fCosY + -1.f * m_fCosZ * -m_fSinY;
-				m_pRight->y = -1.f * m_fSinZ * m_fSinX * m_fSinY + -1.f * m_fCosZ * m_fCosY;
-				m_pRight->z = -1.f * m_fSinZ * m_fCosX;
+				m_pRight->y = -1.f * m_fSinZ * m_fCosX;
+				m_pRight->z = -1.f * m_fSinZ * m_fSinX * m_fSinY + -1.f * m_fCosZ * m_fCosY;
 			}
 
 			if (m_pUp)
 			{
 				m_pUp->x = m_fCosZ * m_fSinX * m_fCosY + -m_fSinZ * -m_fSinY;
-				m_pUp->y = m_fCosZ * m_fSinX * m_fSinY + -m_fSinZ * m_fCosY;
-				m_pUp->z = m_fCosZ * m_fCosX;
+				m_pUp->y = m_fCosZ * m_fCosX;
+				m_pUp->z = m_fCosZ * m_fSinX * m_fSinY + -m_fSinZ * m_fCosY;
 			}
 		}
 	};
