@@ -7,11 +7,21 @@ namespace Unity
 	{
 		il2cppArrayBounds* m_pBounds = nullptr;
 		uintptr_t m_uMaxLength = 0;
-		T m_tValues[65536] = { 0 };
+		T* m_pValues = nullptr;
+
+		uintptr_t GetData()
+		{
+			return reinterpret_cast<uintptr_t>(m_pValues);
+		}
 
 		T& operator[](unsigned int m_uIndex)
 		{
-			return *reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(m_tValues) + sizeof(T) * m_uIndex);
+			return *reinterpret_cast<T*>(GetData() + sizeof(T) * m_uIndex);
+		}
+
+		T& At(unsigned int m_uIndex)
+		{
+			return operator[](m_uIndex);
 		}
 
 		void Insert(T* m_pArray, uintptr_t m_uSize, uintptr_t m_uIndex = 0)
@@ -70,7 +80,7 @@ namespace Unity
 		{
 			if (m_uMaxLength > 0)
 			{
-				memset(m_tValues, 0, sizeof(T) * m_uMaxLength);
+				memset(GetData(), 0, sizeof(T) * m_uMaxLength);
 				m_uMaxLength = 0;
 			}
 		}
