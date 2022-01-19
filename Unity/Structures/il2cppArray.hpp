@@ -11,7 +11,7 @@ namespace Unity
 
 		uintptr_t GetData()
 		{
-			return reinterpret_cast<uintptr_t>(m_pValues);
+			return reinterpret_cast<uintptr_t>(&m_pValues);
 		}
 
 		T& operator[](unsigned int m_uIndex)
