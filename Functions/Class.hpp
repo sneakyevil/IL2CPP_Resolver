@@ -166,6 +166,27 @@ namespace IL2CPP
 		}
 
 		template<typename T>
+		__inline T GetMemberValue(Unity::il2cppFieldInfo* m_pField)
+		{
+			if (!m_pField || 0 > m_pField->m_iOffset)
+			{
+				T m_tDefault = {};
+				return m_tDefault;
+			}
+
+			return GetMemberValue<T>(m_pField->m_iOffset);
+		}
+
+		template<typename T>
+		__inline void SetMemberValue(Unity::il2cppFieldInfo* m_pField, T m_tValue)
+		{
+			if (!m_pField || 0 > m_pField->m_iOffset)
+				return;
+
+			SetMemberValue<T>(m_pField->m_iOffset, m_tValue);
+		}
+
+		template<typename T>
 		T GetMemberValue(const char* m_pMemberName)
 		{
 			Unity::il2cppFieldInfo* pField = reinterpret_cast<Unity::il2cppFieldInfo*(IL2CPP_CALLING_CONVENTION)(void*, const char*)>(Data.Functions.m_pClassGetFieldFromName)(m_Object.m_pClass, m_pMemberName);
