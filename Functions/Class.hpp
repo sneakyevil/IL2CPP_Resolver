@@ -44,6 +44,8 @@ namespace IL2CPP
 			*		(Method) -
 			*/
 			Unity::il2cppClass* FilterClass(std::vector<Unity::il2cppClass*>* m_pClasses, std::initializer_list<const char*> m_vNames, int m_iFoundCount = -1);
+
+			void* FilterClassToMethodPointer(std::vector<Unity::il2cppClass*>* m_pClasses, const char* m_pMethodName, int m_iArgs = -1);
 		}
 	}
 
@@ -103,19 +105,34 @@ namespace IL2CPP
 
 			return m_eClassPropType::Unknown;
 		}
-		
+
+		// Call Method
 		template<typename TReturn, typename... TArgs>
-		TReturn CallMethod(const char* m_pMethodName, TArgs... tArgs)
+		TReturn CallMethod(void* m_pMethod, TArgs... tArgs) { return reinterpret_cast<TReturn(UNITY_CALLING_CONVENTION)(void*, TArgs...)>(m_pMethod)(this, tArgs...); }
+
+		template<typename TReturn, typename... TArgs>
+		TReturn CallMethod(const char* m_pMethodName, TArgs... tArgs) { return CallMethod<TReturn>(GetMethodPointer(m_pMethodName), tArgs...); }
+
+		template<typename TReturn, typename... TArgs>
+		TReturn CallMethodSafe(void* m_pMethod, TArgs... tArgs)
 		{
-			Unity::il2cppMethodInfo* m_pMethod = reinterpret_cast<Unity::il2cppMethodInfo*(IL2CPP_CALLING_CONVENTION)(void*, const char*, int)>(Data.Functions.m_pClassGetMethodFromName)(m_Object.m_pClass, m_pMethodName, -1);
-			if (!m_pMethod || !m_pMethod->m_pMethodPointer)
+			if (!m_pMethod)
 			{
-				TReturn m_tDefault = { 0 };
+				#ifdef _DEBUG 
+					__debugbreak(); // remove it when you wanna step through your code and be like why the fuck it doesn't do anything.
+				#endif
+
+				TReturn m_tDefault = {}; // void goes like illegal use of type. (use void* and fuck them)
 				return m_tDefault;
 			}
 
-			return reinterpret_cast<TReturn(UNITY_CALLING_CONVENTION)(void*, TArgs...)>(m_pMethod->m_pMethodPointer)(this, tArgs...);
+			return CallMethod<TReturn>(m_pMethod, tArgs...);
 		}
+
+		template<typename TReturn, typename... TArgs>
+		TReturn CallMethodSafe(const char* m_pMethodName, TArgs... tArgs) { return CallMethodSafe<TReturn>(GetMethodPointer(m_pMethodName), tArgs...); }
+
+		// Properties/Fields
 
 		template<typename T>
 		T GetPropertyValue(const char* m_pPropertyName)
@@ -124,7 +141,7 @@ namespace IL2CPP
 			if (pProperty && pProperty->m_pGet) 
 				return reinterpret_cast<T(UNITY_CALLING_CONVENTION)(void*)>(pProperty->m_pGet->m_pMethodPointer)(this);
 
-			T tDefault = { 0 };
+			T tDefault = {};
 			return tDefault;
 		}
 
@@ -134,6 +151,39 @@ namespace IL2CPP
 			Unity::il2cppPropertyInfo* pProperty = reinterpret_cast<Unity::il2cppPropertyInfo*(IL2CPP_CALLING_CONVENTION)(void*, const char*)>(Data.Functions.m_pClassGetPropertyFromName)(m_Object.m_pClass, m_pPropertyName);
 			if (pProperty && pProperty->m_pSet) 
 				return reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, T)>(pProperty->m_pSet->m_pMethodPointer)(this, m_tValue);
+		}
+
+		template<typename T>
+		__inline T GetMemberValue(int m_iOffset)
+		{
+			return *reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(this) + m_iOffset);
+		}
+
+		template<typename T>
+		__inline void SetMemberValue(int m_iOffset, T m_tValue)
+		{
+			*reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(this) + m_iOffset) = m_tValue;
+		}
+
+		template<typename T>
+		__inline T GetMemberValue(Unity::il2cppFieldInfo* m_pField)
+		{
+			if (!m_pField || 0 > m_pField->m_iOffset)
+			{
+				T m_tDefault = {};
+				return m_tDefault;
+			}
+
+			return GetMemberValue<T>(m_pField->m_iOffset);
+		}
+
+		template<typename T>
+		__inline void SetMemberValue(Unity::il2cppFieldInfo* m_pField, T m_tValue)
+		{
+			if (!m_pField || 0 > m_pField->m_iOffset)
+				return;
+
+			SetMemberValue<T>(m_pField->m_iOffset, m_tValue);
 		}
 
 		template<typename T>
@@ -147,7 +197,7 @@ namespace IL2CPP
 			else
 				return GetPropertyValue<T>(m_pMemberName);
 
-			T tDefault = { 0 };
+			T tDefault = {};
 			return tDefault;
 		}
 

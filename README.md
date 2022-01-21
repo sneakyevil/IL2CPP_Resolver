@@ -1,6 +1,8 @@
 ## IL2CPP Resolver
 A run-time API resolver for IL2CPP Unity.
 
+[![Donate](https://img.shields.io/badge/Donate-PayPal-red.svg)](https://www.paypal.com/donate/?hosted_button_id=F86FFE644E55E)
+
 ### Quick Example
 ```cpp
 #include "Main.hpp"

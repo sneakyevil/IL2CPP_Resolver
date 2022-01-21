@@ -173,7 +173,7 @@ namespace IL2CPP
 
             void* GetMethodPointer(Unity::il2cppClass* m_pClass, const char* m_pMethodName, int m_iArgs)
             {
-                Unity::il2cppMethodInfo* pMethod = reinterpret_cast<Unity::il2cppMethodInfo * (IL2CPP_CALLING_CONVENTION)(void*, const char*, int)>(Data.Functions.m_pClassGetMethodFromName)(m_pClass, m_pMethodName, m_iArgs);
+                Unity::il2cppMethodInfo* pMethod = reinterpret_cast<Unity::il2cppMethodInfo*(IL2CPP_CALLING_CONVENTION)(void*, const char*, int)>(Data.Functions.m_pClassGetMethodFromName)(m_pClass, m_pMethodName, m_iArgs);
                 if (!pMethod) return nullptr;
 
                 return pMethod->m_pMethodPointer;
@@ -233,6 +233,23 @@ namespace IL2CPP
                 }
 
                 return m_pReturn;
+            }
+
+            void* FilterClassToMethodPointer(std::vector<Unity::il2cppClass*>* m_pClasses, const char* m_pMethodName, int m_iArgs)
+            {
+                void* m_pMethodPointer = nullptr;
+                for (size_t c = 0; m_pClasses->size() > c; ++c)
+                {
+                    Unity::il2cppClass* m_pClass = m_pClasses->operator[](c);
+                    if (!m_pClass)
+                        continue;
+
+                    m_pMethodPointer = GetMethodPointer(m_pClass, m_pMethodName, m_iArgs);
+                    if (m_pMethodPointer)
+                        break;
+                }
+
+                return m_pMethodPointer;
             }
         }
 	}

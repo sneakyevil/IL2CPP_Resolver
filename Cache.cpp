@@ -7,27 +7,35 @@ namespace IL2CPP
 		class CCache
 		{
 		public:
-			const char* m_pName = nullptr;
+			unsigned int m_uHash = 0U;
 			Unity::il2cppObject* m_pSystemType = nullptr;
 
 			CCache() { }
-			CCache(const char* m_pKey, Unity::il2cppObject* m_pValue)
+			CCache(unsigned int m_uKey, Unity::il2cppObject* m_pValue)
 			{
-				m_pName = m_pKey;
+				m_uHash = m_uKey;
 				m_pSystemType = m_pValue;
 			}
 		};
 		std::vector<CCache> m_vCache;
 
-		void Add(const char* m_pName, Unity::il2cppObject* m_pSystemType)
+		void Add(unsigned int m_uHash, Unity::il2cppObject* m_pSystemType)
 		{
-			if (!m_pName || !m_pSystemType)
+			if (!m_pSystemType)
 				return;
 
-			m_vCache.emplace_back(CCache(m_pName, m_pSystemType));
+			m_vCache.emplace_back(CCache(m_uHash, m_pSystemType));
 		}
 
-		Unity::il2cppObject* Find(const char* m_pName)
+		void Add(const char* m_pName, Unity::il2cppObject* m_pSystemType)
+		{
+			if (!m_pName)
+				return;
+
+			Add(Utils::JOAAT(m_pName), m_pSystemType);
+		}
+
+		Unity::il2cppObject* Find(unsigned int m_uHash)
 		{
 			size_t m_sSize = m_vCache.size();
 			if (m_sSize > 0)
@@ -35,12 +43,17 @@ namespace IL2CPP
 				CCache* m_pData = m_vCache.data();
 				for (size_t i = 0; m_sSize > i; ++i)
 				{
-					if (m_pData[i].m_pName == m_pName)
+					if (m_pData[i].m_uHash == m_uHash)
 						return m_pData[i].m_pSystemType;
 				}
 			}
 
 			return nullptr;
+		}
+
+		Unity::il2cppObject* Find(const char* m_pName)
+		{
+			return Find(Utils::JOAAT(m_pName));
 		}
 
 		namespace Initializer

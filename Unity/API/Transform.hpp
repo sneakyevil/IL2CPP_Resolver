@@ -9,12 +9,12 @@ namespace Unity
 		void* m_pGetChild = nullptr;
 		void* m_pGetChildCount = nullptr;
 		void* m_pGetPosition = nullptr;
+		void* m_pGetRotation = nullptr;
 		void* m_pGetLocalPosition = nullptr;
-		void* m_pGetLocalRotation = nullptr;
 		void* m_pGetLocalScale = nullptr;
 		void* m_pSetPosition = nullptr;
+		void* m_pSetRotation = nullptr;
 		void* m_pSetLocalPosition = nullptr;
-		void* m_pSetLocalRotation = nullptr;
 		void* m_pSetLocalScale = nullptr;
 	};
 	extern STransformFunctions TransformFunctions;
@@ -49,17 +49,17 @@ namespace Unity
 			return vRet;
 		}
 
+		Quaternion GetRotation()
+		{
+			Quaternion m_qRet;
+			reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, Quaternion&)>(TransformFunctions.m_pGetRotation)(this, m_qRet);
+			return m_qRet;
+		}
+
 		Vector3 GetLocalPosition()
 		{
 			Vector3 vRet;
 			reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, Vector3&)>(TransformFunctions.m_pGetLocalPosition)(this, vRet);
-			return vRet;
-		}
-
-		Vector3 GetLocalRotation()
-		{
-			Vector3 vRet;
-			reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, Vector3&)>(TransformFunctions.m_pGetLocalRotation)(this, vRet);
 			return vRet;
 		}
 
@@ -75,14 +75,14 @@ namespace Unity
 			reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, Vector3)>(TransformFunctions.m_pSetPosition)(this, m_vVector);
 		}
 
+		void SetRotation(Quaternion m_qQuat)
+		{
+			reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, Quaternion)>(TransformFunctions.m_pSetRotation)(this, m_qQuat);
+		}
+
 		void SetLocalPosition(Vector3 m_vVector)
 		{
 			reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, Vector3)>(TransformFunctions.m_pSetLocalPosition)(this, m_vVector);
-		}
-
-		void SetLocalRotation(Vector3 m_vVector)
-		{
-			reinterpret_cast<void(UNITY_CALLING_CONVENTION)(void*, Vector3)>(TransformFunctions.m_pSetLocalRotation)(this, m_vVector);
 		}
 
 		void SetLocalScale(Vector3 m_vVector)

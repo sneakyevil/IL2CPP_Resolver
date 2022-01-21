@@ -3,11 +3,16 @@
 // #define IL2CPP_ASSERT(x) ((void)(x))
 #include "Defines.hpp"
 
+#define _USE_MATH_DEFINES
+#include <math.h>
 #include <assert.h>
 #include <unordered_map>
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <string>
+
+// Utils
+#include "Utils/Joaat.hpp"
 
 // Unity
 #include "Unity/Includes.hpp"
@@ -28,5 +33,7 @@
 #include "Unity/API/Object.hpp"
 #include "Unity/API/Component.hpp"
 #include "Unity/API/GameObject.hpp"
+#include "Unity/API/Camera.hpp"
 #include "Unity/API/LayerMask.hpp"
+#include "Unity/API/Rigidbody.hpp"
 #include "Unity/API/Transform.hpp"
