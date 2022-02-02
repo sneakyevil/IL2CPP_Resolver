@@ -14,6 +14,7 @@ namespace Unity
 		void* m_pGetTransform = nullptr;
 		void* m_pSetActive = nullptr;
 		void* m_pSetLayer = nullptr;
+		void* m_pFindGameObjectsWithTag = nullptr;
 	};
 	extern SGameObjectFunctions GameObjectFunctions;
 
