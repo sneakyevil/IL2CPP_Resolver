@@ -20,7 +20,7 @@ namespace Unity
 			GameObjectFunctions.m_pGetTransform			= IL2CPP::ResolveCall(UNITY_GAMEOBJECT_GETTRANSFORM);
 			GameObjectFunctions.m_pSetActive			= IL2CPP::ResolveCall(UNITY_GAMEOBJECT_SETACTIVE);
 			GameObjectFunctions.m_pSetLayer				= IL2CPP::ResolveCall(UNITY_GAMEOBJECT_SETLAYER);
-			GameObjectFunctions.m_pFindGameObjectsWithTag = IL2CPP::ResolveCall(UNITY_GAMEOBJECT_FINDGAMEOBJECTWITHTAG);
+			GameObjectFunctions.m_pFindGameObjectsWithTag 	= IL2CPP::ResolveCall(UNITY_GAMEOBJECT_FINDGAMEOBJECTWITHTAG);
 		}
 
 		CGameObject* CreatePrimitive(m_ePrimitiveType m_eType)
