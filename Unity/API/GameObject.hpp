@@ -116,5 +116,7 @@ namespace Unity
 		CGameObject* CreatePrimitive(m_ePrimitiveType m_eType);
 
 		CGameObject* Find(const char* m_pName);
+		
+		il2cppArray<CGameObject*>* FindGameObjectsWithTag(const char* m_pTag);
 	}
 }
