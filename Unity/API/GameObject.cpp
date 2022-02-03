@@ -20,6 +20,7 @@ namespace Unity
 			GameObjectFunctions.m_pGetTransform			= IL2CPP::ResolveCall(UNITY_GAMEOBJECT_GETTRANSFORM);
 			GameObjectFunctions.m_pSetActive			= IL2CPP::ResolveCall(UNITY_GAMEOBJECT_SETACTIVE);
 			GameObjectFunctions.m_pSetLayer				= IL2CPP::ResolveCall(UNITY_GAMEOBJECT_SETLAYER);
+			GameObjectFunctions.m_pFindGameObjectsWithTag 	= IL2CPP::ResolveCall(UNITY_GAMEOBJECT_FINDGAMEOBJECTWITHTAG);
 		}
 
 		CGameObject* CreatePrimitive(m_ePrimitiveType m_eType)
@@ -30,6 +31,11 @@ namespace Unity
 		CGameObject* Find(const char* m_pName)
 		{
 			return reinterpret_cast<CGameObject*(UNITY_CALLING_CONVENTION)(System_String*)>(GameObjectFunctions.m_pFind)(IL2CPP::String::New(m_pName));
+		}
+		
+		il2cppArray<CGameObject*>* FindGameObjectsWithTag(const char* m_pTag)
+		{
+			return reinterpret_cast<il2cppArray<CGameObject*>*(UNITY_CALLING_CONVENTION)(void*)>(GameObjectFunctions.m_pFindGameObjectsWithTag)(IL2CPP::String::New(m_pTag));
 		}
 	}
 }

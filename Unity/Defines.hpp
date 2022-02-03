@@ -29,6 +29,7 @@
 #define UNITY_GAMEOBJECT_GETTRANSFORM 								UNITY_GAMEOBJECT_CLASS"::get_transform"
 #define UNITY_GAMEOBJECT_SETACTIVE 									UNITY_GAMEOBJECT_CLASS"::set_active"
 #define UNITY_GAMEOBJECT_SETLAYER 									UNITY_GAMEOBJECT_CLASS"::set_layer"
+#define UNITY_GAMEOBJECT_FINDGAMEOBJECTWITHTAG					    		UNITY_GAMEOBJECT_CLASS"::FindGameObjectsWithTag"
 
 // LayerMask
 #define UNITY_LAYERMASK_CLASS										"UnityEngine.LayerMask"
