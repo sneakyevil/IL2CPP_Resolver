@@ -7,6 +7,7 @@ namespace Unity
 		void* m_pAddComponent = nullptr;
 		void* m_pCreatePrimitive = nullptr;
 		void* m_pFind = nullptr;
+		void* m_pFindGameObjectsWithTag = nullptr;
 		void* m_pGetComponent = nullptr;
 		void* m_pGetComponents = nullptr;
 		void* m_pGetActive = nullptr;
@@ -14,7 +15,6 @@ namespace Unity
 		void* m_pGetTransform = nullptr;
 		void* m_pSetActive = nullptr;
 		void* m_pSetLayer = nullptr;
-		void* m_pFindGameObjectsWithTag = nullptr;
 	};
 	extern SGameObjectFunctions GameObjectFunctions;
 
@@ -117,6 +117,6 @@ namespace Unity
 
 		CGameObject* Find(const char* m_pName);
 		
-		il2cppArray<CGameObject*>* FindGameObjectsWithTag(const char* m_pTag);
+		il2cppArray<CGameObject*>* FindWithTag(const char* m_pTag);
 	}
 }
