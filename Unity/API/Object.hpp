@@ -46,10 +46,10 @@ namespace Unity
 		template<typename T>
 		static T* FindObjectOfType(il2cppObject* m_pSystemType)
 		{
-			il2cppArray<T>* m_pArray = FindObjectsOfType<T>(m_pSystemType);
+			il2cppArray<T*>* m_pArray = FindObjectsOfType<T>(m_pSystemType);
 			if (!m_pArray || m_pArray->m_uMaxLength == 0U) return nullptr;
 
-			return m_pArray->m_Object[0];
+			return m_pArray->m_tValues[0];
 		}
 
 		template<typename T>
