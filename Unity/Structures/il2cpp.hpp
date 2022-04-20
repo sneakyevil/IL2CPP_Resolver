@@ -92,7 +92,15 @@ namespace Unity
 		int m_iAttributeIndex;
 		unsigned int m_uToken;
 	};
-
+	
+	struct il2cppParameterInfo
+	{
+		const char* m_pName;
+		int m_iPosition;
+		unsigned int m_uToken;
+		il2cppType* m_pParameterType;
+	};
+	
 	struct il2cppMethodInfo
 	{
 		void* m_pMethodPointer;
@@ -100,7 +108,7 @@ namespace Unity
 		const char* m_pName;
 		il2cppClass* m_pClass;
 		il2cppType* m_pReturnType;
-		void* m_pParameters;
+		il2cppParameterInfo* m_pParameters;
 
 		union
 		{
