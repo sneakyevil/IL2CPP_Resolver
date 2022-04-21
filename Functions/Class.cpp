@@ -187,7 +187,45 @@ namespace IL2CPP
 
                 return nullptr;
             }
+	    void* GetMethodPointer(const char* m_pClassName, const char* m_pMethodName, std::vector<std::string> m_pArgNames)
+            {
+                Unity::il2cppClass* m_pClass = Find(m_pClassName);
+                if (!m_pClass)
+                    return nullptr;
 
+                void* m_pMethodIterator = nullptr;
+
+                while (1)
+                {
+                    Unity::il2cppMethodInfo* m_pMethod = GetMethods(m_pClass, &m_pMethodIterator);
+                    if (!m_pMethod)
+                        break;
+
+                    bool m_bNextFunction = false;
+
+                    if (!strcmp(m_pMethod->m_pName, m_pMethodName))
+                    {
+                        Unity::il2cppParameterInfo* m_pCurrentArg = m_pMethod->m_pParameters;
+
+                        for (int i = 0; i < m_pArgNames.size(); i++)
+                        {
+                            if (strcmp(m_pCurrentArg->m_pName, m_pArgNames[i].c_str()))
+                            {
+                                m_bNextFunction = true;
+                                break;
+                            }
+                            m_pCurrentArg++; // m_CurrentArg += sizeof(Unity::il2cppParameterInfo);
+                        }
+                        if (m_bNextFunction) // maybe its another function with same naming and we going to check that
+                        {
+                            continue;
+                        }
+                        return m_pMethod->m_pMethodPointer;
+                    }
+                }
+                return nullptr;
+            }
+		
             Unity::il2cppClass* FilterClass(std::vector<Unity::il2cppClass*>* m_pClasses, std::initializer_list<const char*> m_vNames, int m_iFoundCount)
             {
                 int m_iNamesCount = static_cast<int>(m_vNames.size());
