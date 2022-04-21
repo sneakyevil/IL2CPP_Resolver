@@ -39,10 +39,10 @@ namespace IL2CPP
 			void* GetMethodPointer(const char* m_pClassName, const char* m_pMethodName, int m_iArgs = -1);
 			
 			/*
-			*	Usage
-			*		m_pArgNames = { "arg1" , "arg2" , ... }
+			*	Usage:
+			*		m_vNames = { "arg1" , "arg2" , ... }
 			*/
-			void* GetMethodPointer(const char* m_pClassName, const char* m_pMethodName, std::vector<std::string> m_pArgNames);
+			void* GetMethodPointer(const char* m_pClassName, const char* m_pMethodName, std::initializer_list<const char*> m_vNames);
 
 			
 			/*
