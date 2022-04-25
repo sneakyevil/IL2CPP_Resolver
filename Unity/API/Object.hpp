@@ -49,7 +49,7 @@ namespace Unity
 			il2cppArray<T*>* m_pArray = FindObjectsOfType<T>(m_pSystemType);
 			if (!m_pArray || m_pArray->m_uMaxLength == 0U) return nullptr;
 
-			return m_pArray->m_tValues[0];
+			return m_pArray->m_pValues[0];
 		}
 
 		template<typename T>
