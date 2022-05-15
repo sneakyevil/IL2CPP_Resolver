@@ -17,17 +17,4 @@ void SomeFunction()
 }
 ```
 
-### Creating Thread
-```cpp
-void ThreadStart()
-{ 
-    // Stuff ... Loop ... Smth
-}
-
-void ThreadEnd()
-{
-    // Called after ThreadStart
-}
-
-IL2CPP::Thread::Create(ThreadStart, ThreadEnd);
-```
+More: https://sneakyevil.gitbook.io/il2cpp-resolver/
