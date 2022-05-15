@@ -11,9 +11,6 @@
 #include <windows.h>
 #include <string>
 
-// Utils
-#include "Utils/Joaat.hpp"
-
 // Unity
 #include "Unity/Includes.hpp"
 
@@ -22,6 +19,7 @@
 #include "Cache.hpp"
 
 // IL2CPP
+#include "Functions/Callback.hpp"
 #include "Functions/Class.hpp"
 #include "Functions/Domain.hpp"
 #include "Functions/ResolveCall.hpp"
@@ -37,3 +35,8 @@
 #include "Unity/API/LayerMask.hpp"
 #include "Unity/API/Rigidbody.hpp"
 #include "Unity/API/Transform.hpp"
+
+// Utils
+#include "Utils/Helper.hpp"
+#include "Utils/Joaat.hpp"
+#include "Utils/VFunc.hpp"

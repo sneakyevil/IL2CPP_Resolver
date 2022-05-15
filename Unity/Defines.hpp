@@ -36,6 +36,9 @@
 #define UNITY_LAYERMASK_LAYERTONAME									UNITY_LAYERMASK_CLASS"::LayerToName"
 #define UNITY_LAYERMASK_NAMETOLAYER									UNITY_LAYERMASK_CLASS"::NameToLayer"
 
+// MonoBehaviour
+#define UNITY_MONOBEHAVIOUR_CLASS                                   "UnityEngine.MonoBehaviour"
+
 // Object
 #define UNITY_OBJECT_CLASS											"UnityEngine.Object"
 #define UNITY_OBJECT_DESTROY										UNITY_OBJECT_CLASS"::Destroy"
