@@ -17,4 +17,20 @@ void SomeFunction()
 }
 ```
 
+### Registering OnUpdate Callback
+```cpp
+void OurUpdateFunction()
+{
+    // Your special code...
+}
+
+void OnLoad()
+{
+    IL2CPP::Initialize();
+
+    IL2CPP::Callback::Initialize();
+    IL2CPP::Callback::OnUpdate::Add(OurUpdateFunction);
+}
+```
+
 More: https://sneakyevil.gitbook.io/il2cpp-resolver/
