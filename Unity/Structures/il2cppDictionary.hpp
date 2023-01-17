@@ -53,8 +53,8 @@ namespace Unity
 		{
 			TValue tValue = { 0 };
 			for (int i = 0; i < m_iCount; i++) {
-				if (GetEntry()[i].key == key)
-					tValue =  GetEntry()[i].value;
+				if (GetEntry()[i].m_tKey == tKey)
+					tValue =  GetEntry()[i].m_tValue;
 			}
 			return tValue;
 		}
