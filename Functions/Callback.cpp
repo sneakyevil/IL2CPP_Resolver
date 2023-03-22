@@ -61,7 +61,7 @@ namespace IL2CPP
 			// Fetch
 			{
 				void** m_pMonoBehaviourVTable = *reinterpret_cast<void***>(IL2CPP::Helper::GetMonoBehaviour()->m_CachedPtr);
-				if (m_pMonoBehaviourVTable) // x86: darkness my old friend
+				if (m_pMonoBehaviourVTable) // x86: Hello my old friend :)
 				{
 					#ifdef _WIN64
 					OnUpdate::Data.m_pVTable = VFunc::Find_ASM(m_pMonoBehaviourVTable, 99, { 0x33, 0xD2, 0xE9 }); // xor edx, edx | jmp
