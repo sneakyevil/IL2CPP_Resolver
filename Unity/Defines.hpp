@@ -1,6 +1,12 @@
 #pragma once
 // Calling Convention
+#ifdef _WIN64
 #define UNITY_CALLING_CONVENTION __fastcall*
+#elif _WIN32
+#define UNITY_CALLING_CONVENTION __cdecl*
+#endif
+
+
 
 // Camera
 #define UNITY_CAMERA_CLASS                                          "UnityEngine.Camera"
