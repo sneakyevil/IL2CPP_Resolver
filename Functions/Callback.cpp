@@ -68,8 +68,8 @@ namespace IL2CPP
 				void* m_pMonoBehaviourVTable = *(void**)IL2CPP::Helper::GetMonoBehaviour()->m_CachedPtr;
 				if (m_pMonoBehaviourVTable) // x86: welcome back my old friend :)
 				{
-					OnUpdate::Data.m_pVTable = (void**)((DWORD)m_pMonoBehaviourVTable + ON_UPDATE_OFFSET);
-					OnLateUpdate::Data.m_pVTable = (void**)((DWORD)m_pMonoBehaviourVTable + ON_LATE_UPDATE_OFFSET);
+					OnUpdate::Data.m_pVTable = (void**)((intptr_t)m_pMonoBehaviourVTable + ON_UPDATE_OFFSET);
+					OnLateUpdate::Data.m_pVTable = (void**)((intptr_t)m_pMonoBehaviourVTable + ON_LATE_UPDATE_OFFSET);
 				}
 			}
 
@@ -77,8 +77,8 @@ namespace IL2CPP
 
 			// Replace
 			{
-				Replace_VFunc(OnUpdate::Data.m_pVTable,		OnUpdate::Caller,		&OnUpdate::Data.m_pOriginal);
-				Replace_VFunc(OnLateUpdate::Data.m_pVTable,	OnLateUpdate::Caller,	&OnLateUpdate::Data.m_pOriginal);
+				Replace_VFunc(OnUpdate::Data.m_pVTable,	OnUpdate::Caller,		&OnUpdate::Data.m_pOriginal);
+				Replace_VFunc(OnLateUpdate::Data.m_pVTable, OnLateUpdate::Caller,	&OnLateUpdate::Data.m_pOriginal);
 			}
 		}
 
