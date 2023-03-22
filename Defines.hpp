@@ -29,4 +29,10 @@
 #define IL2CPP_TYPE_GET_OBJECT_EXPORT					"il2cpp_type_get_object"
 
 // Calling Convention
+
+#ifdef _WIN64
 #define IL2CPP_CALLING_CONVENTION __fastcall*
+#elif _WIN32
+#define IL2CPP_CALLING_CONVENTION __cdecl*
+#endif
+

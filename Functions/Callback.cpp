@@ -4,6 +4,11 @@ namespace IL2CPP
 {
 	namespace Callback
 	{
+		const int ON_UPDATE_OFFSET = 0x1C * sizeof(void*);
+		const int ON_FIXED_UPDATE_OFFSET = 0x1D * sizeof(void*);
+		const int ON_LATE_UPDATE_OFFSET = 0x1E * sizeof(void*);
+		//const int DO_GUI_OFFSET = 0x21 * sizeof(void*);
+
 		struct _VFuncCallback
 		{
 			std::vector<void*> m_vFunctions;
@@ -60,11 +65,11 @@ namespace IL2CPP
 
 			// Fetch
 			{
-				void** m_pMonoBehaviourVTable = *reinterpret_cast<void***>(IL2CPP::Helper::GetMonoBehaviour()->m_CachedPtr);
-				if (m_pMonoBehaviourVTable) // x86: darkness my old friend
+				void* m_pMonoBehaviourVTable = *(void**)IL2CPP::Helper::GetMonoBehaviour()->m_CachedPtr;
+				if (m_pMonoBehaviourVTable) // x86: welcome back my old friend :)
 				{
-					OnUpdate::Data.m_pVTable		= VFunc::Find_ASM(m_pMonoBehaviourVTable, 99, { 0x33, 0xD2, 0xE9 }); // xor edx, edx | jmp
-					OnLateUpdate::Data.m_pVTable	= VFunc::Find_ASM(m_pMonoBehaviourVTable, 99, { 0xBA, 0x01, 0x00, 0x00, 0x00, 0xE9 }); //  mov edx, 1 | jmp
+					OnUpdate::Data.m_pVTable = (void**)((DWORD)m_pMonoBehaviourVTable + ON_UPDATE_OFFSET);
+					OnLateUpdate::Data.m_pVTable = (void**)((DWORD)m_pMonoBehaviourVTable + ON_LATE_UPDATE_OFFSET);
 				}
 			}
 
