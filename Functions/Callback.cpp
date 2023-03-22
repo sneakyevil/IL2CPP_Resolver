@@ -68,7 +68,7 @@ namespace IL2CPP
 					OnLateUpdate::Data.m_pVTable = VFunc::Find_ASM(m_pMonoBehaviourVTable, 99, { 0xBA, 0x01, 0x00, 0x00, 0x00, 0xE9 }); //  mov edx, 1 | jmp
 					#elif _WIN32
 					OnUpdate::Data.m_pVTable = VFunc::Find_ASM(m_pMonoBehaviourVTable, 99, { 0x6A, 0x00, 0xE8 }); // push 00 | call
-					OnLateUpdate::Data.m_pVTable = VFunc::Find_ASM(m_pMonoBehaviourVTable, 99, { 0x6A, 0x01, 0xE8 }); // push 00 | call
+					OnLateUpdate::Data.m_pVTable = VFunc::Find_ASM(m_pMonoBehaviourVTable, 99, { 0x6A, 0x01, 0xE8 }); // push 01 | call
 					#endif
 				}
 			}
