@@ -14,6 +14,7 @@ namespace Unity
 			TransformFunctions.m_pGetRoot				= IL2CPP::ResolveCall(UNITY_TRANSFORM_GETROOT);
 			TransformFunctions.m_pGetChild				= IL2CPP::ResolveCall(UNITY_TRANSFORM_GETCHILD);
 			TransformFunctions.m_pGetChildCount			= IL2CPP::ResolveCall(UNITY_TRANSFORM_GETCHILDCOUNT);
+			TransformFunctions.m_pFindChild				= IL2CPP::ResolveCall(UNITY_TRANSFORM_FINDCHILD);
 			TransformFunctions.m_pGetPosition			= IL2CPP::ResolveCall(UNITY_TRANSFORM_GETPOSITION);
 			TransformFunctions.m_pGetRotation			= IL2CPP::ResolveCall(UNITY_TRANSFORM_GETROTATION);
 			TransformFunctions.m_pGetLocalPosition		= IL2CPP::ResolveCall(UNITY_TRANSFORM_GETLOCALPOSITION);

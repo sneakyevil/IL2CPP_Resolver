@@ -10,6 +10,7 @@ namespace Unity
 		void* m_pFindGameObjectsWithTag = nullptr;
 		void* m_pGetComponent = nullptr;
 		void* m_pGetComponents = nullptr;
+		void* m_pGetComponentInChildren = nullptr;
 		void* m_pGetActive = nullptr;
 		void* m_pGetLayer = nullptr;
 		void* m_pGetTransform = nullptr;
@@ -29,6 +30,20 @@ namespace Unity
 		CComponent* GetComponent(const char* m_pName)
 		{
 			return reinterpret_cast<CComponent*(UNITY_CALLING_CONVENTION)(void*, System_String*)>(GameObjectFunctions.m_pGetComponent)(this, IL2CPP::String::New(m_pName));
+		}
+
+		CComponent* GetComponentInChildren(il2cppObject* m_pSystemType, bool includeInactive)
+		{
+			return reinterpret_cast<CComponent*(UNITY_CALLING_CONVENTION)(void*, void*, bool)>(GameObjectFunctions.m_pGetComponentInChildren)(this, m_pSystemType, includeInactive);
+		}
+
+		// e.g CGameObject->GetComponentInChildren("Namespace.Component");
+		CComponent* GetComponentInChildren(const char* type)
+		{
+			il2cppClass* m_pClass = IL2CPP::Class::Find(type);
+			if (!m_pClass) return nullptr;
+
+			return GetComponentInChildren(IL2CPP::Class::GetSystemType(m_pClass), true);
 		}
 
 		il2cppArray<CComponent*>* GetComponents(il2cppObject* m_pSystemType)

@@ -16,6 +16,7 @@ namespace Unity
 			GameObjectFunctions.m_pFindGameObjectsWithTag	= IL2CPP::ResolveCall(UNITY_GAMEOBJECT_FINDGAMEOBJECTWITHTAG);
 			GameObjectFunctions.m_pGetComponent				= IL2CPP::ResolveCall(UNITY_GAMEOBJECT_GETCOMPONENT);
 			GameObjectFunctions.m_pGetComponents			= IL2CPP::ResolveCall(UNITY_GAMEOBJECT_GETCOMPONENTS);
+			GameObjectFunctions.m_pGetComponentInChildren	= IL2CPP::ResolveCall(UNITY_GAMEOBJECT_GETCOMPONENTINCHILDREN);
 			GameObjectFunctions.m_pGetActive				= IL2CPP::ResolveCall(UNITY_GAMEOBJECT_GETACTIVE);
 			GameObjectFunctions.m_pGetLayer					= IL2CPP::ResolveCall(UNITY_GAMEOBJECT_GETLAYER);
 			GameObjectFunctions.m_pGetTransform				= IL2CPP::ResolveCall(UNITY_GAMEOBJECT_GETTRANSFORM);
