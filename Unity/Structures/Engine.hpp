@@ -16,7 +16,25 @@ namespace Unity
 
 		Vector3() { x = y = z = 0.f; }
 		Vector3(float f1, float f2, float f3) { x = f1; y = f2; z = f3; }
+		
+		float Length()
+		{
+			return x * x + y * y + z * z;
+		}
+		
+		float Dot(Vector3 b)
+		{
+			return x * b.x + y * b.y + z * b.z;
+		}
 
+		Vector3 Normalize()
+		{
+			float len = Length();
+			if (len > 0)
+				return Vector3(x / len, y / len, z / len);
+			else
+				return Vector3(x, y, z);
+		}
 		void ToVectors(Vector3* m_pForward, Vector3* m_pRight, Vector3* m_pUp)
 		{
 			float m_fDeg2Rad = static_cast<float>(M_PI) / 180.f;
