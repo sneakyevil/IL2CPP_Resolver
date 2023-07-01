@@ -34,6 +34,8 @@ namespace IL2CPP
 		void* m_ThreadDetach = nullptr;
 
 		void* m_TypeGetObject = nullptr;
+
+		void* m_pObjectNew = nullptr;
 	};
 	Functions_t Functions;
 }
