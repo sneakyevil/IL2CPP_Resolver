@@ -18,6 +18,7 @@
 #define IL2CPP_THREAD_ATTACH_EXPORT						IL2CPP_RStr("il2cpp_thread_attach")
 #define IL2CPP_THREAD_DETACH_EXPORT						IL2CPP_RStr("il2cpp_thread_detach")
 #define IL2CPP_TYPE_GET_OBJECT_EXPORT					IL2CPP_RStr("il2cpp_type_get_object")
+#define IL2CPP_OBJECT_NEW							IL2CPP_RStr("il2cpp_object_new")
 
 // Calling Convention
 #ifdef _WIN64
