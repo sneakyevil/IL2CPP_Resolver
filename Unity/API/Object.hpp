@@ -37,7 +37,7 @@ namespace Unity
 
 		static il2cppObject* New(il2cppClass* m_pClass)
 		{
-			return reinterpret_cast<Unity::il2cppObject*(UNITY_CALLING_CONVENTION)(void*)>(IL2CPP::Data.Functions.m_pObjectNew)(m_pClass);
+			return reinterpret_cast<Unity::il2cppObject*(UNITY_CALLING_CONVENTION)(void*)>(IL2CPP::Functions.m_pObjectNew)(m_pClass);
 		}
 	
 		template<typename T>
