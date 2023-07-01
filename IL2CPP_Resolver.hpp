@@ -166,7 +166,7 @@ namespace IL2CPP
 				{ IL2CPP_THREAD_ATTACH_EXPORT,					&Functions.m_ThreadAttach },
 				{ IL2CPP_THREAD_DETACH_EXPORT,					&Functions.m_ThreadDetach },
 				{ IL2CPP_TYPE_GET_OBJECT_EXPORT,				&Functions.m_TypeGetObject },
-				{ IL2CPP_OBJECT_NEW,							&Data.Functions.m_pObjectNew },
+				{ IL2CPP_OBJECT_NEW,							&Functions.m_pObjectNew },
 			};
 
 			for (auto& m_ExportPair : m_ExportMap)
