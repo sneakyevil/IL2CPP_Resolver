@@ -104,6 +104,9 @@ namespace Unity
 	struct il2cppMethodInfo
 	{
 		void* m_pMethodPointer;
+#ifdef UNITY_VERSION_2022_3_8F1
+		void* m_pVirtualMethodPointer;
+#endif
 		void* m_pInvokerMethod;
 		const char* m_pName;
 		il2cppClass* m_pClass;
