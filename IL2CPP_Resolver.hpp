@@ -9,6 +9,12 @@
 #include <unordered_map>
 #include <Windows.h>
 
+// Application Defines
+#ifndef UNITY_VERSION_2022_3_8F1
+	// If Unity version is equal or greater than 2022.3.8f1 uncomment this define.
+	// #define UNITY_VERSION_2022_3_8F1
+#endif
+
 // IL2CPP Defines
 
 // Disable Asserts
