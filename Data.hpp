@@ -36,6 +36,9 @@ namespace IL2CPP
 		void* m_TypeGetObject = nullptr;
 
 		void* m_pObjectNew = nullptr;
+		void* m_MethodGetParamName = nullptr;
+		void* m_MethodGetParam = nullptr;
+		void* m_ClassFromIl2cppType = nullptr;
 	};
 	Functions_t Functions;
 }

@@ -188,6 +188,26 @@ namespace IL2CPP
                 return nullptr;
             }
 
+            const char* MethodGetParamName(Unity::il2cppMethodInfo* m_pMethodInfo, uint32_t index)
+            {
+                if (index >= m_pMethodInfo->m_uArgsCount)
+                    return nullptr;
+
+                return reinterpret_cast<const char * (IL2CPP_CALLING_CONVENTION)(void*, uint32_t)>(Functions.m_MethodGetParamName)(m_pMethodInfo, index);
+            }
+
+            Unity::il2cppType* GetMethodParamType(Unity::il2cppMethodInfo* m_pMethodInfo, uint32_t index) {
+                if (index >= m_pMethodInfo->m_uArgsCount)
+                    return nullptr;
+
+                return reinterpret_cast<Unity::il2cppType * (IL2CPP_CALLING_CONVENTION)(void*, uint32_t)>(Functions.m_MethodGetParam)(m_pMethodInfo, index);
+            }
+
+            Unity::il2cppClass* ClassFromType(Unity::il2cppType * type)
+            {
+                return reinterpret_cast<Unity::il2cppClass * (IL2CPP_CALLING_CONVENTION)(void*)>(Functions.m_ClassFromIl2cppType)(type);
+            }
+
             void* GetMethodPointer(const char* m_pClassName, const char* m_pMethodName, std::initializer_list<const char*> m_vNames)
             {
                 Unity::il2cppClass* m_pClass = Find(m_pClassName);
@@ -207,6 +227,21 @@ namespace IL2CPP
                     if (strcmp(m_pMethod->m_pName, m_pMethodName) != 0)
                         continue;
 
+                    #ifdef UNITY_VERSION_2022_3_8F1
+                    Unity::il2cppType** m_pCurrentParameterTypes = m_pMethod->m_pParameters;
+
+                    for (size_t i = 0; i < m_pMethod->m_uArgsCount; ++i)
+                    {
+                        Unity::il2cppType* m_pCurrentParameterType = m_pCurrentParameterTypes[i];
+                        Unity::il2cppClass* m_pClass = ClassFromType(m_pCurrentParameterType);
+
+                        if (strcmp(m_pClass->m_pName, m_pNames[i]) != 0)
+                            break;
+
+                        if ((i + 1) == m_iNamesCount)
+                            return m_pMethod->m_pMethodPointer;
+                    }
+                    #else
                     Unity::il2cppParameterInfo* m_pCurrentParameters = m_pMethod->m_pParameters;
                     for (int i = 0; m_iNamesCount > i; ++i)
                     {
@@ -217,6 +252,7 @@ namespace IL2CPP
                         if ((i + 1) == m_iNamesCount)
                             return m_pMethod->m_pMethodPointer;
                     }
+                    #endif
                 }
                 return nullptr;
             }
