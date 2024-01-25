@@ -47,7 +47,7 @@
 // Object
 #define UNITY_OBJECT_CLASS											"UnityEngine.Object"
 #define UNITY_OBJECT_DESTROY										IL2CPP_RStr(UNITY_OBJECT_CLASS"::Destroy")
-#define UNITY_OBJECT_FINDOBJECTSOFTYPE								IL2CPP_RStr(UNITY_OBJECT_CLASS"::FindObjectsOfType")
+#define UNITY_OBJECT_FINDOBJECTSOFTYPE								IL2CPP_RStr(UNITY_OBJECT_CLASS"::FindObjectsOfType(System.Type,System.Boolean)")
 #define UNITY_OBJECT_GETNAME										IL2CPP_RStr(UNITY_OBJECT_CLASS"::GetName")
 
 // Rigidbody
