@@ -73,4 +73,4 @@ namespace Unity
 			return FindObjectOfType<T>(IL2CPP::Class::GetSystemType(m_pClass), m_pIncludeInactive);
 		}
 	}
-}
+} 
