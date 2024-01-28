@@ -43,7 +43,7 @@ namespace Unity
 		template<typename T>
 		static il2cppArray<T*>* FindObjectsOfType(il2cppObject* m_pSystemType, bool m_pIncludeInactive = false)
 		{
-			return reinterpret_cast<Unity::il2cppArray<T*>*(UNITY_CALLING_CONVENTION)(void*, bool)>(ObjectFunctions.m_pFindObjectsOfType)(m_pSystemType, m_pIncludeInactive);
+			return reinterpret_cast<Unity::il2cppArray<T*>*(UNITY_CALLING_CONVENTION)(void*, bool)>(m_ObjectFunctions.m_FindObjectsOfType)(m_pSystemType, m_pIncludeInactive);
 		}
 
 		template<typename T>
