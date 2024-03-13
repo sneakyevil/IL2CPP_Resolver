@@ -39,6 +39,9 @@ namespace IL2CPP
 		void* m_MethodGetParamName = nullptr;
 		void* m_MethodGetParam = nullptr;
 		void* m_ClassFromIl2cppType = nullptr;
+
+		void* m_FieldStaticGetValue = nullptr;
+		void* m_FieldStaticSetValue = nullptr;
 	};
 	Functions_t Functions;
 }
