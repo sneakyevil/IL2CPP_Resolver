@@ -171,6 +171,36 @@ namespace IL2CPP
                 return -1;
             }
 
+            void SetStaticField(Unity::il2cppClass* m_pClass, const char* m_pMemberName, void* m_pValue) {
+                Unity::il2cppFieldInfo* m_pField = reinterpret_cast<Unity::il2cppFieldInfo * (IL2CPP_CALLING_CONVENTION)(void*, const char*)>(Functions.m_ClassGetFieldFromName)(m_pClass, m_pMemberName);
+                if (m_pField)
+                    reinterpret_cast<void (IL2CPP_CALLING_CONVENTION)(Unity::il2cppFieldInfo*, void*)>(Functions.m_FieldStaticSetValue)(m_pField, m_pValue);
+            }
+
+            void SetStaticField(const char* m_pClassName, const char* m_pMemberName, void* m_pValue) {
+                Unity::il2cppClass* m_pClass = Find(m_pClassName);
+                if (m_pClass)
+                    SetStaticField(m_pClass, m_pMemberName, m_pValue);
+            }
+
+            void* GetStaticField(Unity::il2cppClass* m_pClass, const char* m_pMemberName) {
+                Unity::il2cppFieldInfo* m_pField = reinterpret_cast<Unity::il2cppFieldInfo * (IL2CPP_CALLING_CONVENTION)(void*, const char*)>(Functions.m_ClassGetFieldFromName)(m_pClass, m_pMemberName);
+                void* m_pValue = nullptr;
+                if (m_pField)
+                    reinterpret_cast<void (IL2CPP_CALLING_CONVENTION)(Unity::il2cppFieldInfo*, void*)>(Functions.m_FieldStaticGetValue)(m_pField, &m_pValue);
+
+                return m_pValue;
+            }
+
+            void* GetStaticField(const char* m_pClassName, const char* m_pMemberName)
+            {
+                Unity::il2cppClass* m_pClass = Find(m_pClassName);
+                if (m_pClass)
+                    return GetStaticField(m_pClass, m_pMemberName);
+
+                return nullptr;
+            }
+
             void* GetMethodPointer(Unity::il2cppClass* m_pClass, const char* m_pMethodName, int m_iArgs = -1)
             {
                 Unity::il2cppMethodInfo* pMethod = reinterpret_cast<Unity::il2cppMethodInfo * (IL2CPP_CALLING_CONVENTION)(void*, const char*, int)>(Functions.m_ClassGetMethodFromName)(m_pClass, m_pMethodName, m_iArgs);

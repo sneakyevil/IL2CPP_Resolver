@@ -22,6 +22,8 @@
 #define IL2CPP_METHOD_GET_PARAM_NAME					IL2CPP_RStr("il2cpp_method_get_param_name")
 #define IL2CPP_METHOD_GET_PARAM							IL2CPP_RStr("il2cpp_method_get_param")
 #define IL2CPP_CLASS_FROM_IL2CPP_TYPE					IL2CPP_RStr("il2cpp_class_from_il2cpp_type")
+#define IL2CPP_FIELD_STATIC_GET_VALUE					IL2CPP_RStr("il2cpp_field_static_get_value")
+#define IL2CPP_FIELD_STATIC_SET_VALUE					IL2CPP_RStr("il2cpp_field_static_set_value")
 
 // Calling Convention
 #ifdef _WIN64
