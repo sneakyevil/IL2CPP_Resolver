@@ -1,0 +1,47 @@
+name: "Ask a question, report a bug, request a feature, etc."
+description: "Ask any question, discuss best practices, report a bug, request a feature."
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We understand if you encounter any errors related to this library in your game, please make sure you have basic Unity knowledge before posting an issue. To do this, you need to know: what the Scene contains, what GameObject contains, how Component comes from, and have certain basic reverse engineering knowledge.
+        We also need to be detailed enough about your critical code so that we understand how you use our library, and try to provide the smallest reproducible snippet of code.
+  - type: markdown
+    attributes:
+      value: |
+        **Prerequisites:**
+        - I have searched [Github Issues and PR](https://github.com/sneakyevil/IL2CPP_Resolver/issues?q=) for discussion of similar topics.
+
+        ----
+  - type: input
+    id: game_name
+    attributes:
+      label: "What is the game you are using with IL2CPP Resolver?"
+      description: "(optional: provide the link to the game. ex. steam appid / steamdb link)"
+      placeholder: "(Name of the game)"
+    validations:
+      required: true
+  - type: textarea
+    id: issue_description
+    attributes:
+      label: "Details:"
+      description: "Try to be explicit with your goals, your expectations and what you have tried. Be mindful of [The XY Problem](https://xyproblem.info). What you have in mind or in your code is not obvious to other people. People frequently discuss problems and suggest incorrect solutions without first clarifying their goals. When requesting a new feature, please describe the usage context (how you intend to use it, why you need it, etc.). If you tried something and it failed, show us what you tried. If you are reporting a bug, explain what's the bug, how does it occur, etc. If you are reporting a crash, please include a debugger callstack."
+      placeholder: "(Your issue/question/request)"
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: "Screenshots/Video:"
+      description: "Attach screenshots or gif/videos to clarify the context. They often convey useful information that is omitted by the description."
+      placeholder: "(You can drag files here)"
+    validations:
+      required: false
+  - type: textarea
+    id: repro_code
+    attributes:
+      label: "Minimal, Complete and Verifiable Example code:"
+      description: "Provide an [MCVE](https://stackoverflow.com/help/mcve) to demonstrate your problem. Narrowing your problem to its shortest and purest form is the easiest way to understand it, explain it and fix it. Please test your shortened code to ensure it exhibits the problem. Often while creating the MCVE you will solve the problem! Many questions that are missing a standalone verifiable example are missing the actual cause of their issue in the description, which ends up wasting everyone's time."
+      placeholder: "(Your code to replicate the problem)"
+    validations:
+      required: false
